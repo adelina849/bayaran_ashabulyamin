@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?=base_url();?>assets/plugins/images/favicon.png">
+    <title>Aplikasi Bayaran Sekolah Ashabul Yamin</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="<?=base_url();?>assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="<?=base_url();?>assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="<?=base_url();?>assets/css/animate.css" rel="stylesheet">
+    <!-- data table-->
+    <link href="<?=base_url();?>assets/plugins/bower_components/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <!-- Custom CSS -->
+    <link href="<?=base_url();?>assets/css/style.css" rel="stylesheet">
+    <!-- color CSS -->
+    <link href="<?=base_url();?>assets/css/colors/blue.css" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.<?=base_url();?>assets/js/1.4.2/respond.min.js"></script>
+
+<![endif]-->
+
+</head>
+
+<body class="fix-header">
+    <!-- ============================================================== -->
+    <!-- Preloader -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+        </svg>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Wrapper -->
+    <!-- ============================================================== -->
+    <div id="wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+
+        <?php $this->load->view('admin/topbar.html'); ?>
+
+        <!-- End Top Navigation -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+
+        <?php $this->load->view('admin/sidebar.html'); ?>
+
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page Content -->
+        <!-- ============================================================== -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+              <div class="row bg-title">
+                  <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                      <h4 class="page-title">Master Siswa</h4> </div>
+                        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+
+                            <ol class="breadcrumb">
+                                <li><a href="<?=base_url();?>">Dashboard</a></li>
+                                <li><a href="<?=base_url();?>siswa">Siswa</a></li>
+                                <li class="active">Input Siswa</li>
+                            </ol>
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                               <div class="panel-heading">
+
+                               </div>
+                               <div class="panel-body">
+                                 <table class="table">
+                               	    <tr><td>NIS Siswa</td><td><?php echo $kode_siswa; ?></td></tr>
+                               	    <tr><td>Nama Siswa</td><td><?php echo $nama_siswa; ?></td></tr>
+                                    <tr><td>Nama Kelas</td><td><?php echo $nama_kelas; ?></td></tr>
+                               	    <tr><td>Tgl Lahir</td><td><?php echo $tgl_lahir; ?></td></tr>
+                               	    <tr><td>Jkel</td><td><?php echo $jkel; ?></td></tr>
+                               	    <tr><td>Alamat</td><td><?php echo $alamat; ?></td></tr>
+                               	    <tr><td>No Hp</td><td><?php echo $no_hp; ?></td></tr>
+                                    <tr><td>Hutang Awal</td><td><?php echo number_format($hutang_awal); ?></td></tr>
+                               	    <tr><td></td><td><a href="<?php echo site_url('siswa') ?>" class="btn btn-default">Cancel</a></td></tr>
+                               	</table>
+                               </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="white-box">
+                              <h3 class="box-title">Foto Siswa</h3>
+                              <div class="text-center"> <img src="<?=base_url();?>assets/images/siswa/<?=$avatar;?>" class="img-responsive" /> </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                          <div class="panel panel-default">
+                             <div class="panel-heading">
+                               Sisa Tagihan
+                             </div>
+                             <div class="panel-body">
+                               <table class="table color-bordered-table info-bordered-table" id="mytable">
+                                   <thead>
+                                       <tr>
+                                          <th class="text-center">Kelas</th>
+                                          <th class="text-center">Bulanan</th>
+                                          <th class="text-center">Semesteran</th>
+                                          <th class="text-center">Tahunan</th>
+                                          <th class="text-center">Tetap</th>
+                                       </tr>
+                                   </thead>
+                                   <tbody>
+                                     <tr>
+                                       <td class="text-center"><?php if(!empty($total_sisa_bulanan)) { echo $nama_kelas; } ?></td>
+                                       <td class="text-center"><?php if(!empty($total_sisa_bulanan)) { echo number_format($total_sisa_bulanan); } ?></td>
+                                       <td class="text-center"><?php if(!empty($total_sisa_semester)) { echo number_format($total_sisa_semester); } ?></td>
+                                       <td class="text-center"><?php if(!empty($total_sisa_tahunan)) { echo number_format($total_sisa_tahunan); } ?></td>
+                                       <td class="text-center"><?php if(!empty($total_sisa_tetap)) { echo number_format($total_sisa_tetap); } ?></td>
+                                     </tr>
+                                   </tbody>
+                                </table>
+                             </div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                          <div class="panel panel-default">
+                             <div class="panel-heading">
+                               Hitory Transaksi
+                             </div>
+                             <div class="panel-body">
+                               <table class="table color-table info-table" id="mytable">
+                                   <thead>
+                                       <tr>
+                                           <th width="80px">No</th>
+                                            <th>Kode Transaksi</th>
+                                            <th>Tanggal Bayar</th>
+                                            <th>Jenis Bayaran</th>
+                                            <th>Nominal</th>
+                                            <th width="200px">Action</th>
+                                       </tr>
+                                   </thead>
+                                   <body>
+                                     <?php
+                                      if(!empty($list_transaksi))
+                                      {
+                                        $no=1;
+                                        foreach($list_transaksi as $row)
+                                        {
+                                     ?>
+                                          <tr>
+                                          <td><?=$no;?></td>
+                                          <td><?=$row->kode_tran;?></td>
+                                          <td><?=$row->tgl_bayar;?></td>
+                                          <td><?=$row->nama_kat_bayaran;?></td>
+                                          <td><?=number_format($row->nominal);?></td>
+                                          <td></td>
+                                          </tr>
+                                     <?php
+                                            $no++;
+                                         }
+                                       }
+                                     ?>
+                                   </body>
+                               </table>
+                             </div>
+                          </div>
+                      </div>
+                    </div>
+
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+
+
+
+                <!-- ============================================================== -->
+            </div>
+            <!-- /.container-fluid -->
+            <footer class="footer text-center"> 2019 &copy; Ashabul Yamin </footer>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page Content -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="<?=base_url();?>assets/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <!--slimscroll JavaScript -->
+    <script src="<?=base_url();?>assets/js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="<?=base_url();?>assets/js/waves.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="<?=base_url();?>assets/js/custom.min.js"></script>
+    <!--Style Switcher -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+
+
+</body>
+
+</html>

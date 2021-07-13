@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?=base_url();?>assets/plugins/images/favicon.png">
+    <title>Aplikasi Bayaran Sekolah Ashabul Yamin</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="<?=base_url();?>assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="<?=base_url();?>assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="<?=base_url();?>assets/css/animate.css" rel="stylesheet">
+    <!-- data table-->
+    <link href="<?=base_url();?>assets/plugins/bower_components/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <!-- Custom CSS -->
+    <link href="<?=base_url();?>assets/css/style.css" rel="stylesheet">
+    <!-- data table -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
+    <!-- color CSS -->
+    <link href="<?=base_url();?>assets/css/colors/blue.css" id="theme" rel="stylesheet">
+
+    <!-- Date picker plugins css -->
+    <link href="<?=base_url();?>assets/plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.<?=base_url();?>assets/js/1.4.2/respond.min.js"></script>
+
+<![endif]-->
+    <style>
+        .dataTables_wrapper {
+            min-height: 500px
+        }
+
+        .dataTables_processing {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            margin-left: -50%;
+            margin-top: -25px;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            color:grey;
+        }
+    </style>
+
+</head>
+
+<body class="fix-header">
+    <!-- ============================================================== -->
+    <!-- Preloader -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+        </svg>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Wrapper -->
+    <!-- ============================================================== -->
+    <div id="wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+
+        <?php $this->load->view('admin/topbar.html'); ?>
+
+        <!-- End Top Navigation -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+
+        <?php $this->load->view('admin/sidebar.html'); ?>
+
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page Content -->
+        <!-- ============================================================== -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+              <div class="row bg-title">
+                  <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                      <h4 class="page-title">Bayaran Siswa</h4> </div>
+                        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+
+                            <ol class="breadcrumb">
+                                <li><a href="<?=base_url();?>">Dashboard</a></li>
+                                <li class="active">Bayaran Siswa</li>
+                            </ol>
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                               <div class="panel-heading">
+                                    <div class="row">
+
+                                            <div class="col-md-3">
+                                                Table Bayaran Siswa
+                                                <?php echo $this->session->userdata('message'); ?>
+                                            </div>
+                                          <form action="<?=base_url();?>2-bayaran-siswa<?php echo '?'.http_build_query($_GET); ?>" method="get">
+                                            <div class="col-md-2">
+                                              <div class="form-group">
+                                                 <select name="ajaran" id="ajaran" class="required form-control" title="Tahun Ajaran">
+                                                   <option value="">-- Tahun Ajaran --</option>
+                                                   <?php
+                                                     if(!empty($list_ajaran))
+                                                     {
+                                                       //$list_result2 = $list_ajaran->result();
+                                                       foreach($list_ajaran as $row)
+                                                       {
+                                                   ?>
+                                                        <option <?php if (!empty($_GET['ajaran']) && $_GET['ajaran'] == $row->id_ajaran){echo 'selected';} ?> value="<?=$row->id_ajaran;?>"><?=$row->nama_ajaran;?></option>
+                                                <?php  }
+                                                     } ?>
+                                                 </select>
+                                             </div>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                              <div class="form-group">
+                                                 <select name="kelas" id="kelas" class="required form-control select2" title="Kelas">
+                                                   <option value='' >-- Semua Kelas --</option>
+                                                   <?php
+                                                     if(!empty($list_kelas))
+                                                     {
+                                                         //$list_result = $list_kelas->result();
+                                                         foreach($list_kelas as $row)
+                                                         {
+                                                   ?>
+                                                         <option <?php if (!empty($_GET['kelas']) && $_GET['kelas'] == $row->id_kelas){echo 'selected';} ?> value="<?=$row->id_kelas;?>"><?=$row->nama_kelas;?></option>
+                                                   <?php }
+                                                     }
+                                                   ?>
+                                                 </select>
+                                             </div>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                              <div class="form-group">
+                                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Tampilkan</button>
+                                              </div>
+                                            </div>
+                                          </form>
+                                            <div class="col-md-3">
+                                                <div class="panel-action">
+                                                    <!--<a href="<?=base_url();?>2-input-bayaran-kelas">Input Data<i class="ti-plus"></i></a>-->
+                                                    <a href="#" onclick="clearForm()" data-toggle="modal" data-target="#modalTambah" data-backdrop="static" data-keyboard="false">Input Data<i class="ti-plus"></i></a>
+                                                </div>
+                                            </div>
+
+                                    </div>
+                               </div>
+                               <div class="panel-body">
+                                 <table class="table table-bordered table-striped" id="mytable">
+
+                                   <thead>
+                                       <tr>
+                                           <th width="80px">No</th>
+                                            <th width="10%">Kelas</th>
+                                            <th width="10%">Kode Bayaran</th>
+                                            <th width="25%">Siswa</th>
+                                     		    <th width="15%">Nama Bayaran</th>
+                                            <th width="15%">Kategori Bayaran</th>
+                                            <th width="15%">Nominal</th>
+                                     		    <th width="200px">Action</th>
+                                       </tr>
+                                   </thead>
+                                   <body>
+                                    <?php
+                                      if(!empty($list_bayaran_siswa))
+                                      {
+                                          $no=1;
+                                          $list_bayaran_result = $list_bayaran_siswa->result();
+                                          foreach($list_bayaran_result as $row)
+                                          {
+                                            echo'<tr>';
+                  													echo'<td><input type="hidden" id="no_'.$no.'" value="'.$row->id_bayaran_siswa.'" />'.$no.'</td>';
+                                            echo'<td>'.$row->nama_kelas.'</td>';
+                                            echo'<td>'.$row->kode_bayaran.'</td>';
+                                            echo'<td>'.$row->nama_siswa.'</td>';
+                                            echo'<td>'.$row->nama_bayaran.'</td>';
+                                            echo'<td>'.$row->nama_kat_bayaran.'</td>';
+                                            echo'<td>'.$row->nominal.'</td>';
+                                            echo'<td>
+                                              <!-- <a href="'.base_url().'c_bayaran_siswa/update/'.$row->id_bayaran_siswa.'" class="btn btn-warning">Ubah</a> -->
+                															<button type="button" onclick="konfirmHapus('.$no.')" data-toggle="modal" data-target=".bs-example-modal-sm" class="btn btn-danger">Hapus</button>
+                                            </td>';
+                                            echo '</tr>';
+
+                                            $no++;
+                                          }
+                                      }
+                                    ?>
+                                   </body>
+                                   </table>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+
+
+
+                <!-- ============================================================== -->
+            </div>
+            <!-- /.container-fluid -->
+            <footer class="footer text-center"> 2019 &copy; Ashabul Yamin </footer>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page Content -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- MODAL TAMBAH -->
+    <div id="modalTambah" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <form action="<?php echo base_url(); ?>C_bayaran_siswa/create_action<?php echo '?'.http_build_query($_GET); ?>" method="post">
+            <!--<div>-->
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h4 class="modal-title" id="myModalLabel">Input Bayaran Siswa</h4> </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-lg-6">
+
+                          <input type="hidden" name="id_bayaran_kelas" />
+
+                        <div class="form-group">
+                               <label for="bigint">Tahun Ajaran <?php echo form_error('id_tahun_ajaran') ?></label>
+                           <select name="id_tahun_ajaran" id="id_tahun_ajaran" class="required form-control" title="Tahun Ajaran">
+                             <option value="">-- Tahun Ajaran --</option>
+                             <?php
+                               if(!empty($list_ajaran))
+                               {
+                                 foreach($list_ajaran as $row)
+                                 {
+                             ?>
+                                  <option value="<?=$row->id_ajaran;?>"><?=$row->nama_ajaran;?></option>
+                          <?php  }
+                               } ?>
+                           </select>
+                        </div>
+                        <div class="form-group">
+                               <label for="bigint">Kelas <?php echo form_error('id_kelas') ?></label>
+                               <select name="id_kelas" id="id_kelas" class="required form-control select2" title="Kelas">
+                                 <option value='' >-- Pilih Kelas --</option>
+                                 <?php
+                                   if(!empty($list_kelas))
+                                   {
+                                       foreach($list_kelas as $row)
+                                       {
+                                 ?>
+                                       <option value="<?=$row->id_kelas;?>"><?=$row->nama_kelas;?></option>
+                                 <?php }
+                                   }
+                                 ?>
+                               </select>
+                           </div>
+                        <div class="form-group">
+                               <label for="bigint">Bayaran <?php echo form_error('id_bayaran') ?></label>
+                               <select name="id_bayaran" id="id_bayaran" onchange="setMulaiBerlaku()" class="required form-control select2" title="Bayaran">
+                                 <option value='' >-- Pilih Bayaran --</option>
+                                 <?php
+                                   if(!empty($list_bayaran))
+                                   {
+                                       foreach($list_bayaran as $row)
+                                       {
+                                 ?>
+                                       <option value="<?=$row->id_bayaran;?>"><?=$row->nama_bayaran;?> (<?=$row->nama_kat_bayaran;?>)</option>
+                                 <?php }
+                                   }
+                                 ?>
+                               </select>
+                           </div>
+
+                           <!-- <div class="form-group">
+                                <label for="date">Mulai Berlaku</label>
+                                <div class="input-group">
+                                   <input type="text" name="mulai_berlaku" class="form-control" value="<?php echo date('Y-m-d');?>" id="datepicker-autoclose" placeholder="yyyy/mm/dd"> <span class="input-group-addon"><i class="icon-calender"></i></span>
+                                </div>
+
+                            </div> -->
+                            <div class="form-group">
+                               <label for="bigint">Mulai Berlaku <?php echo form_error('mulai_berlaku') ?></label>
+                               <select name="mulai_berlaku" id="mulai_berlaku"  required="" class="required form-control select2" title="Mulai Berlaku">
+                                 <option value='' >-- Pilih Bayaran --</option>
+
+                               </select>
+                            </div>
+                        <!--<div class="form-group">
+                               <label for="varchar">Kode Bayaran Kelas <?php echo form_error('kode_bayaran_kelas') ?></label>-->
+
+                           <input type="hidden" class="form-control" name="kode_bayaran_kelas" id="kode_bayaran_kelas" placeholder="Kode Bayaran Kelas" />
+                           <!--</div>-->
+                        <!--<div class="form-group">
+                               <label for="varchar">Nama Bayaran Kelas <?php echo form_error('nama_bayaran_kelas') ?></label>-->
+                          <input type="hidden" class="form-control" name="nama_bayaran_kelas" id="nama_bayaran_kelas" placeholder="Nama Bayaran Kelas" />
+                           <!--</div>-->
+                          <div class="form-group">
+                               <label for="keterangan">Keterangan <?php echo form_error('keterangan') ?></label>
+                               <textarea class="form-control" rows="3" name="keterangan" id="keterangan" placeholder="Keterangan"></textarea>
+                          </div>
+
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <label for="keterangan">Keterangan <?php echo form_error('keterangan') ?></label>
+                            <div class="input-group m-b-10">
+
+            									<input type="text" id="cari2" name="cari2" class="form-control" placeholder="NIK Siswa...">
+            									<span class="input-group-btn">
+            										<button onclick="showListSiswa()" class="btn btn-info" type="button">Cari!</button>
+            									</span>
+            								</div>
+                          </div>
+                          <div class="col-lg-12">
+
+                              <div class="table-responsive">
+
+                                <table class="table">
+                                  <thead>
+                                    <tr>
+                                      <th width="5%" class="text-center">#</th>
+                                      <th width="25%">NIS</th>
+                                      <th width="50%">Nama Siswa</th>
+                                      <th>Action</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody id="table_siswa">
+                                  </tbody>
+                                </table>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+              <div class="modal-footer">
+                <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-success waves-effect">Simpan</button>
+                <!-- <button type="button" onclick="cekData()" class="btn btn-primary">Simpan</button> -->
+                <button href="#" class="btn btn-warning waves-effect" data-dismiss="modal" aria-hidden="true">Close</button>
+              </div>
+            </form>
+            <!--</div>-->
+          </div>
+          <!-- /.modal-content -->
+      </div>
+
+    </div>
+    <!-- /.modal -->
+    <!-- MODAL TAMBAH -->
+
+    <!-- MODAL KONFIRMASI DELETE -->
+      <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+       <div class="modal-dialog modal-sm">
+         <div class="modal-content">
+           <input type="hidden" id="temp_hapus" name="temp_hapus" />
+           <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+             <h4 class="modal-title" id="mySmallModalLabel">Konfirmasi</h4> </div>
+           <div class="modal-body">Anda yakin data akan dihapus? </div>
+           <div class="modal-footer">
+             <button type="button" onclick="hapusProduk()" class="btn btn-danger waves-effect" data-dismiss="modal">Hapus</button>
+             <button type="button"  class="btn btn-warning waves-effect" data-dismiss="modal">Close</button>
+           </div>
+         </div>
+         <!-- /.modal-content -->
+       </div>
+       <!-- /.modal-dialog -->
+     </div>
+      <!-- MODAL KONFIRMASI DELETE -->
+
+
+    <!-- jQuery -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="<?=base_url();?>assets/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <!--slimscroll JavaScript -->
+    <script src="<?=base_url();?>assets/js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="<?=base_url();?>assets/js/waves.js"></script>
+    <!-- data table -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="<?=base_url();?>assets/js/custom.min.js"></script>
+    <!--Style Switcher -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+
+    <script>
+
+    // Date Picker
+    jQuery('.mydatepicker, #datepicker').datepicker();
+    jQuery('#datepicker-autoclose').datepicker({
+        autoclose: true,
+        todayHighlight: true,
+        format: 'yyyy-mm-dd'
+    });
+
+    jQuery('#datepicker-autoclose2').datepicker({
+        autoclose: true,
+        todayHighlight: true,
+        format: 'yyyy-mm-dd'
+    });
+    jQuery('#date-range').datepicker({
+        toggleActive: true,
+        format: 'yyyy-mm-dd'
+    });
+
+    </script>
+
+    <script type="text/javascript">
+      function setMulaiBerlaku()
+      {
+        //alert('dd');
+        var id = $('#id_bayaran').val();
+        var id_tahun_ajaran = $('#id_tahun_ajaran').val();
+
+
+        $.post("<?=base_url();?>index.php/C_bayaran_kelas/get_mulai_berlaku/",
+        {
+          id: id,
+          id_tahun_ajaran: id_tahun_ajaran,
+        },
+        function(data, status){
+          //alert(data);
+          $('#mulai_berlaku').html(data);
+        });
+      }
+
+      function showListSiswa()
+      {
+        var cari = $('#cari2').val();
+        var id_ajaran = $('#id_tahun_ajaran').val();
+        var id_kelas = $('#id_kelas').val();
+        var id_bayaran = $('#id_bayaran').val();
+
+        $('#table_siswa').html('mencari data');
+
+        $.post("<?=base_url();?>index.php/C_kelas_siswa/list_siswa_kelas_bayaran/",
+        {
+          cari: cari,
+          id_ajaran: id_ajaran,
+          id_kelas: id_kelas,
+          id_bayaran: id_bayaran,
+        },
+        function(data, status){
+          //alert(data);
+          if(data)
+          {
+            $('#table_siswa').html(data);
+          } else {
+
+          }
+        });
+      }
+
+
+
+    	function konfirmHapus(id)
+    	{
+        //alert(id);
+    		$('input[name=temp_hapus]').val($('#no_'+id).val());
+    	}
+
+    	function hapusProduk()
+    	{
+    		var id = $('#temp_hapus').val();
+
+        //alert(id);
+    		$.post("<?=base_url();?>index.php/C_bayaran_siswa/delete/",
+    		{
+    			id: id
+    		},
+    		function(data, status){
+    			//alert(status);
+
+    			window.location.reload();
+
+    		});
+    	}
+
+      function cekData()
+      {
+        var id_ajaran = $('#id_tahun_ajaran').val();
+        var id_kelas = $('#id_kelas').val();
+        var id_bayaran = $('#id_bayaran').val();
+        var id_bayaran_kelas = $('#id_bayaran_kelas').val();
+
+
+    		$.post("<?=base_url();?>index.php/C_bayaran_kelas/cek_data/",
+    		{
+    			id_ajaran: id_ajaran,
+          id_kelas: id_kelas,
+          id_bayaran: id_bayaran,
+    		},
+    		function(data, status){
+    			//alert(data);
+          if(data == 1)
+          {
+            $.post("<?=base_url();?>index.php/C_bayaran_kelas/create_action/",
+        		{
+        			id_ajaran: id_ajaran,
+              id_kelas: id_kelas,
+              id_bayaran: id_bayaran,
+        		},
+        		function(data, status){
+              window.location.reload();
+            });
+          } else {
+            alert('Data sudah di input');
+          }
+
+    		});
+      }
+
+    </script>
+</body>
+
+</html>

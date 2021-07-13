@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" type="image/png" sizes="16x16" href="<?=base_url();?>assets/plugins/images/favicon.png">
+<title>Aplikasi Bayaran Sekolah Ashabul Yamin</title>
+<!-- Bootstrap Core CSS -->
+<link href="<?=base_url();?>assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- animation CSS -->
+<link href="<?=base_url();?>assets/css/animate.css" rel="stylesheet">
+<!-- Wizard CSS -->
+<link href="<?=base_url();?>assets/plugins/bower_components/register-steps/steps.css" rel="stylesheet">
+<!-- Custom CSS -->
+<link href="<?=base_url();?>assets/css/style.css" rel="stylesheet">
+<!-- color CSS -->
+<link href="<?=base_url();?>assets/css/colors/default.css" id="theme"  rel="stylesheet">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+<!-- Preloader -->
+<div class="preloader">
+  <div class="cssload-speeding-wheel"></div>
+</div>
+<section id="wrapper" class="step-register">
+  <div class="register-box">
+    <div class="">
+       <a href="javascript:void(0)" class="text-center db m-b-40"><img src="<?=base_url();?>assets/plugins/images/admin-logo-dark.png" alt="Home" /><br/><img src="<?=base_url();?>assets/plugins/images/admin-text-dark.png" alt="Home" /></a>
+      <!-- multistep form -->
+        <form id="msform" action="<?=base_url();?>C_admin_login/do_register" method="post">
+        <!-- progressbar -->
+        <ul id="eliteregister">
+        <li class="active">Pengaturan Akun</li>
+        <li>Data Pribadi</li>
+        <li>Data Kehamilan</li>
+        </ul>
+        <!-- fieldsets -->
+        <fieldset>
+        <h2 class="fs-title">Buat Akun Baru</h2>
+        <h3 class="fs-subtitle"></h3>
+        <input type="text" name="username" placeholder="Email" />
+        <input type="password" name="password" placeholder="Password" />
+        <input type="password" name="password2" placeholder="Confirm Password" />
+        <input type="button" name="next" class="next action-button" value="Next" />
+        <?php
+
+          if($this->session->flashdata('msg') != '')
+          {
+              echo '<div class="alert alert-danger">'.$this->session->flashdata('msg').'</div>';
+          }
+        ?>
+
+        </fieldset>
+        <fieldset>
+        <h2 class="fs-title">Data Pribadi</h2>
+        <h3 class="fs-subtitle">Lengkapi Biodata</h3>
+        <input type="text" name="nama" placeholder="Nama Lengkap" />
+        <input type="text" name="tgl_lahir" placeholder="Tanggal Lahir (yyyy/mm/dd)" data-mask="9999/99/99" class="form-control">
+        <input type="text" name="hp" placeholder="No. Handphone" />
+
+        <input type="button" name="previous" class="previous action-button" value="Previous" />
+        <input type="button" name="next" class="next action-button" value="Next" />
+        </fieldset>
+        <fieldset>
+        <h2 class="fs-title">Data Kehamilan</h2>
+        <h3 class="fs-subtitle">Lengkapi data kehamilan</h3>
+        <input type="number" name="day_pregan" placeholder="Usia Kehamilan (hari)" />
+        <input type="number" name="berat" placeholder="Berat Badan" />
+        <input type="button" name="previous" class="previous action-button" value="Previous" />
+        <input type="submit" name="submit" class="action-button" />
+        </fieldset>
+        </form>
+        <div class="clear"></div>
+    </div>
+  </div>
+</section>
+<!-- jQuery -->
+<script src="<?=base_url();?>assets/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="<?=base_url();?>assets/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- Menu Plugin JavaScript -->
+<script src="<?=base_url();?>assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+<script src="<?=base_url();?>assets/plugins/bower_components/register-steps/jquery.easing.min.js"></script>
+<script src="<?=base_url();?>assets/plugins/bower_components/register-steps/register-init.js"></script>
+<!--slimscroll JavaScript -->
+<script src="<?=base_url();?>assets/js/jquery.slimscroll.js"></script>
+<!--Wave Effects -->
+<script src="<?=base_url();?>assets/js/waves.js"></script>
+<!-- Custom Theme JavaScript -->
+<script src="<?=base_url();?>assets/js/custom.min.js"></script>
+<!-- Custom Theme JavaScript -->
+<script src="<?=base_url();?>assets/js/mask.js"></script>
+<!--Style Switcher -->
+<script src="<?=base_url();?>assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+
+<script type="text/javascript">
+  //alert('<?php echo $this->session->flashdata('msg');?>');
+</script>
+
+
+</body>
+</html>

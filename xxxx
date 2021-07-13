@@ -1,0 +1,115 @@
+<div id="modalTambah" class="modal fade bs-example-modal-lg in" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <form action="<?=base_url();?>C_tran_siswa/simpan_bayar/" method="post">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <!-- <h4 class="modal-title" id="myLargeModalLabel">Transaksi</h4> -->
+                <div class="text-left">
+                    <input type="hidden" name="no_pembayaran" id="no_pembayaran" value="<?=$no_pembayaran;?>" />
+                    <p><strong>No. Pembayaran : <?=$no_pembayaran;?></strong></p>
+                </div>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-lg-12 col-md-12">
+                      <!-- <input type="hidden" name="id_siswa" value="<?=$detail->id_siswa;?>" />
+                      <input type="hidden" name="id_ajaran" value="<?=$detail->id_ajaran;?>" />
+                      <input type="hidden" name="id_kelas" value="<?=$detail->id_kelas;?>" /> -->
+                    <!-- <?php
+                      if(!empty($list_bayaran))
+                      {
+                        $no=1;
+
+                        $total_tunggakan=0;
+                    ?> -->
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="table-responsive" style="clear: both;">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width="10%">#</th>
+                                        <th width="40%">Deskripsi</th>
+                                        <th width="15%">Periode</th>
+                                        <th class="text-right">Subtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="list_tagihan2">
+                                  <tr>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                  </tr>
+                                  <!-- <?php
+                                     $list = $list_bayaran->result();
+                                     foreach($list as $row)
+                                     {
+                                       echo '<tr>';
+                                       echo '<td><input type="hidden" name="id_bayaran['.$no.']" value="'.$row->id_bayaran.'" />'.$no.'</td>';
+                                       echo '<td>'.$row->nama_bayaran.'</td>';
+                                       echo '<td>'.$row->periode.'</td>';
+                                       echo '<td class="text-right">'.number_format($row->nominal).'</td>';
+                                       echo '<input type="hidden" name="nominal_['.$no.']" value="'.$row->nominal.'" />';
+                                       echo '<input type="hidden" name="periode_['.$no.']" value="'.$row->kode_periode.'" />';
+
+                                       echo '</tr>';
+
+                                       $total_tunggakan += $row->nominal;
+
+                                       $no++;
+                                     }
+
+                                  ?> -->
+                                </tbody>
+                            </table>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="pull-right m-t-30 text-right">
+                             <!-- <h4>Total: Rp. <?=number_format($total_tunggakan);?></h4> -->
+                             <input type="hidden" name="biaya_pengurang" id="biaya_pengurang" value="<?=$biaya_pengurang;?>" />
+                             <!-- <p>Potongan Biaya : Rp. <?=number_format($biaya_pengurang);?></p> -->
+                             <hr>
+                             <!-- <h3><b>Total Pembayaran:</b> Rp. <?=number_format($total_tunggakan - $biaya_pengurang);?></h3> </div> -->
+                         <div class="clearfix"></div>
+                         <hr>
+
+
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <textarea name="keterangan" id="keterangan" placeholder="Keterangan" class="form-control" rows="2"></textarea>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+
+                      </div>
+                      <div class="col-md-6">
+                        <div class="text-right">
+
+                            <!--<button id="print" class="btn btn-default btn-outline" type="button"> <span><i class="fa fa-print"></i> Print</span> </button>-->
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <?php
+                  } else {
+                     echo 'Tidak ada Data';
+                  }
+                    ?> -->
+
+                </div>
+
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-info" onclick="return confirm('Apakah anda yakin?')" type="submit"> Proses Pembayaran </button>
+                <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
+            </div>
+          </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

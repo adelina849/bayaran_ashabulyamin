@@ -1,0 +1,187 @@
+<div class="row">
+  <div class="col-lg-4 col-sm-6 col-xs-12">
+      <div class="white-box">
+          <h3 class="box-title">Uang Kas</h3>
+          <div class="text-right"> <span class="text-muted">Total</span>
+              <h1><sup><i class="ti-arrow-up text-success"></i></sup> Rp. 12.000.000</h1>
+          </div>
+
+      </div>
+  </div>
+  <div class="col-lg-4 col-sm-6 col-xs-12">
+      <div class="white-box">
+          <h3 class="box-title">Pembiayaan</h3>
+          <div class="text-right"> <span class="text-muted">Per Semester</span>
+              <h1><sup><i class="ti-arrow-down text-danger"></i></sup> Rp. 5.000.000</h1>
+          </div>
+      </div>
+  </div>
+  <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+    <div class="white-box">
+          <h3 class="box-title">Total Proyek</h3>
+          <ul class="list-inline two-part">
+              <li><i class="icon-folder text-purple"></i></li>
+              <li class="text-right"><span class="counter"><?=number_format($total_proyek);?></span></li>
+          </ul>
+      </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+    <div class="panel">
+            <div class="p-20">
+                <div class="row">
+                    <div class="col-xs-8">
+                        <h4 class="m-b-0">Total Tunggakan</h4>
+                        <h2 class="m-t-0 font-medium">Rp 1.250.000</h2>
+                    </div>
+                    <div class="col-xs-4 p-20">
+                        <select class="form-control">
+                            <option>DEC</option>
+                            <option>JAN</option>
+                            <option>FEB</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer bg-extralight">
+                <ul class="earning-box">
+                    <li>
+                        <div class="er-row">
+                            <div class="er-pic"><img src="<?=base_url();?>assets/images/siswa/1-min.jpg" alt="varun" width="60" class="img-circle"></div>
+                            <div class="er-text">
+                                <h3>Raisa</h3>
+                                <!-- <span class="text-muted">10-06-2019</span> -->
+                              </div>
+                            <div class="er-count ">Rp.<span class="counter">125.000</span></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="er-row">
+                            <div class="er-pic"><img src="<?=base_url();?>assets/images/siswa/2-min.jpg" alt="varun" width="60" class="img-circle"></div>
+                            <div class="er-text">
+                                <h3>Raffa</h3>
+                                <!-- <span class="text-muted">10-06-2019</span> -->
+                              </div>
+                            <div class="er-count ">Rp.<span class="counter">225.000</span></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="er-row">
+                            <div class="er-pic"><img src="<?=base_url();?>assets/images/siswa/5-min.jpg" alt="varun" width="60" class="img-circle"></div>
+                            <div class="er-text">
+                                <h3>Irman</h3>
+                                <!-- <span class="text-muted">10-06-2019</span> -->
+                              </div>
+                            <div class="er-count ">Rp.<span class="counter">75.000</span></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="er-row">
+                            <div class="er-pic"><img src="<?=base_url();?>assets/images/siswa/4-min.jpg" alt="varun" width="60" class="img-circle"></div>
+                            <div class="er-text">
+                                <h3>Lisda</h3>
+                                <!-- <span class="text-muted">10-06-2019</span> -->
+                              </div>
+                            <div class="er-count ">Rp.<span class="counter">125.000</span></div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+  </div>
+  <div class="col-lg-6 col-sm-12 col-xs-12">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="white-box">
+              <h3 class="box-title">Total Siswa</h3>
+              <ul class="list-inline two-part">
+                  <li><i class="icon-people text-purple"></i></li>
+                  <li class="text-right"><span class="counter"><?=number_format($total_siswa);?></span></li>
+              </ul>
+          </div>
+      </div>
+      <div class="col-lg-12">
+        <div class="white-box">
+              <h3 class="box-title">Jumlah Kelas</h3>
+              <ul class="list-inline two-part">
+                  <li><i class="icon-people text-purple"></i></li>
+                  <li class="text-right"><span class="counter"><?=number_format($total_kelas);?></span></li>
+              </ul>
+          </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="white-box">
+            <!-- <div class="col-md-3 col-sm-4 col-xs-6 pull-right">
+                <select class="form-control pull-right row b-none">
+                    <option>March 2017</option>
+                    <option>April 2017</option>
+                    <option>May 2017</option>
+                    <option>June 2017</option>
+                    <option>July 2017</option>
+                </select>
+            </div> -->
+            <h3 class="box-title">LIST PROYEK</h3>
+            <!-- <div class="row sales-report">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <h2>March 2017</h2>
+                    <p>SALES REPORT</p>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 ">
+                    <h1 class="text-right text-info m-t-20">$3,690</h1>
+                </div>
+            </div> -->
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>NAMA PROYEK</th>
+                            <th>PENANGGUNG JAWAB</th>
+                            <th>MULAI PROYEK</th>
+                            <th>TOTAL DANA</th>
+                            <th>STATUS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                          if(!empty($list_proyek))
+                          {
+                              $no=1;
+                              foreach($list_proyek as $row)
+                              {
+                                echo '<tr>';
+                                echo '<td>'.$no.'</td>';
+                                echo '<td>'.$row->nama_proyek.'</td>';
+                                echo '<td>'.$row->penanggung_jawab.'</td>';
+                                echo '<td>'.$row->tgl_mulai.'</td>';
+                                echo '<td>'.number_format($row->nominal).'</td>';
+
+                                if($row->status_proyek == '0')
+                                {
+                                  echo '<td>On Progress</td>';
+                                } else {
+                                  echo '<td>Selesai</td>';
+                                }
+                                echo '</tr>';
+
+                                $no++;
+                              }
+                          }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+  </div>
+
+</div>

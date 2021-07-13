@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?=base_url();?>assets/plugins/images/favicon.png">
+    <title>Aplikasi Bayaran Sekolah Ashabul Yamin</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="<?=base_url();?>assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="<?=base_url();?>assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="<?=base_url();?>assets/css/animate.css" rel="stylesheet">
+    <!-- data table-->
+    <link href="<?=base_url();?>assets/plugins/bower_components/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <!-- Custom CSS -->
+    <link href="<?=base_url();?>assets/css/style.css" rel="stylesheet">
+    <!-- color CSS -->
+    <link href="<?=base_url();?>assets/css/colors/blue.css" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.<?=base_url();?>assets/js/1.4.2/respond.min.js"></script>
+
+<![endif]-->
+
+</head>
+
+<body class="fix-header">
+    <!-- ============================================================== -->
+    <!-- Preloader -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+        </svg>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Wrapper -->
+    <!-- ============================================================== -->
+    <div id="wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+
+        <?php $this->load->view('admin/topbar.html'); ?>
+
+        <!-- End Top Navigation -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+
+        <?php $this->load->view('admin/sidebar.html'); ?>
+
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page Content -->
+        <!-- ============================================================== -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+              <div class="row bg-title">
+                  <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                      <h4 class="page-title">View Data Proyek</h4> </div>
+                        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+
+                            <ol class="breadcrumb">
+                                <li><a href="<?=base_url();?>">Dashboard</a></li>
+                                <li><a href="<?=base_url();?>proyek">Proyek</a></li>
+                                <li class="active">View Proyek</li>
+                            </ol>
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                               <div class="panel-heading">
+
+                               </div>
+                               <div class="panel-body">
+                                 <table class="table">
+                                 	    <tr><td>Kode Proyek</td><td><?php echo $kode_proyek; ?></td></tr>
+                                 	    <tr><td>Nama Proyek</td><td><?php echo $nama_proyek; ?></td></tr>
+                                 	    <tr><td>Penanggung Jawab</td><td><?php echo $penanggung_jawab; ?></td></tr>
+                                 	    <tr><td>Tgl Mulai</td><td><?php echo $tgl_mulai; ?></td></tr>
+                                 	    <tr><td>Tgl Selesai</td><td><?php echo $tgl_selesai; ?></td></tr>
+                                 	    <tr><td>Nominal</td><td><?php echo $nominal; ?></td></tr>
+                                 	    <tr><td>Keterangan</td><td><?php echo $keterangan; ?></td></tr>
+                                 	    <tr><td></td><td><a href="<?php echo site_url('c_proyek') ?>" class="btn btn-default">Cancel</a></td></tr>
+                                 	</table>
+                               </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+
+                        </div>
+                    </div>
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+
+
+
+                <!-- ============================================================== -->
+            </div>
+            <!-- /.container-fluid -->
+            <footer class="footer text-center"> 2019 &copy; Ashabul Yamin </footer>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page Content -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="<?=base_url();?>assets/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <!--slimscroll JavaScript -->
+    <script src="<?=base_url();?>assets/js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="<?=base_url();?>assets/js/waves.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="<?=base_url();?>assets/js/custom.min.js"></script>
+    <!--Style Switcher -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?=base_url();?>assets/plugins/images/favicon.png">
+    <title>Aplikasi Bayaran Sekolah Ashabul Yamin</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="<?=base_url();?>assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="<?=base_url();?>assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="<?=base_url();?>assets/css/animate.css" rel="stylesheet">
+    <!-- data table-->
+    <link href="<?=base_url();?>assets/plugins/bower_components/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <!-- Custom CSS -->
+    <link href="<?=base_url();?>assets/css/style.css" rel="stylesheet">
+    <!-- color CSS -->
+    <link href="<?=base_url();?>assets/css/colors/blue.css" id="theme" rel="stylesheet">
+
+    <!-- Date picker plugins css -->
+    <link href="<?=base_url();?>assets/plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+
+
+    <link rel="stylesheet" href="<?=base_url();?>assets/plugins/bower_components/dropify/dist/css/dropify.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.<?=base_url();?>assets/js/1.4.2/respond.min.js"></script>
+
+<![endif]-->
+
+</head>
+
+<body class="fix-header">
+    <!-- ============================================================== -->
+    <!-- Preloader -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+        </svg>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Wrapper -->
+    <!-- ============================================================== -->
+    <div id="wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+
+        <?php $this->load->view('admin/topbar.html'); ?>
+
+        <!-- End Top Navigation -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+
+        <?php $this->load->view('admin/sidebar.html'); ?>
+
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page Content -->
+        <!-- ============================================================== -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+              <div class="row bg-title">
+                  <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                      <h4 class="page-title">Master Siswa</h4> </div>
+                        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+
+                            <ol class="breadcrumb">
+                                <li><a href="<?=base_url();?>">Dashboard</a></li>
+                                <li><a href="<?=base_url();?>siswa">Siswa</a></li>
+                                <li class="active">Input Siswa</li>
+                            </ol>
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+
+                    <div class="row">
+                        <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
+                          <div class="col-md-6">
+                              <div class="panel panel-default">
+                                 <div class="panel-heading">
+
+                                 </div>
+                                 <div class="panel-body">
+                                     <?php echo $this->session->flashdata('message'); ?>
+                                 	    <div class="form-group">
+                                             <label for="varchar">NIS Siswa <?php echo form_error('kode_siswa') ?></label>
+                                             <input type="text" class="form-control" name="kode_siswa" id="kode_siswa" placeholder="Kode Siswa" value="<?php echo $kode_siswa; ?>" />
+                                         </div>
+                                 	    <div class="form-group">
+                                             <label for="varchar">Nama Siswa <?php echo form_error('nama_siswa') ?></label>
+                                             <input type="text" class="form-control" name="nama_siswa" id="nama_siswa" placeholder="Nama Siswa" value="<?php echo $nama_siswa; ?>" />
+                                         </div>
+                                 	    <div class="form-group">
+                                             <label for="date">Tgl Lahir <?php echo form_error('tgl_lahir') ?></label>
+                                             <div class="input-group">
+                                                <input type="text" name="tgl_lahir" class="form-control" value="<?php echo $tgl_lahir; ?>" id="datepicker-autoclose" placeholder="yyyy/mm/dd"> <span class="input-group-addon"><i class="icon-calender"></i></span>
+                                             </div>
+
+                                         </div>
+                                 	    <div class="form-group">
+                                         <label for="varchar">Jenis Kelamin <?php echo form_error('jkel') ?></label>
+                                         <select name="jkel" id="jkel" class="required form-control select2" title="jenis kelamin">
+                                           <option value="L" <?php if($jkel == 'L') { echo 'selected'; } ?> >Laki-laki</option>
+                                           <option value="P" <?php if($jkel == 'P') { echo 'selected'; } ?> >Perempuan</option>
+                                         </select>
+                                     </div>
+
+                                     <div class="form-group">
+                                          <label for="varchar">Hutang Awal <?php echo form_error('hutang_awal') ?></label>
+                                          <input type="number" class="form-control" name="hutang_awal" id="hutang_awal" placeholder="Hutang Awal" value="<?php echo $hutang_awal; ?>" />
+                                      </div>
+
+                                 	    <div class="form-group">
+                                             <label for="varchar">Alamat <?php echo form_error('alamat') ?></label>
+                                             <input type="text" class="form-control" name="alamat" id="alamat" placeholder="Alamat" value="<?php echo $alamat; ?>" />
+                                         </div>
+                                 	    <div class="form-group">
+                                             <label for="varchar">No Hp <?php echo form_error('no_hp') ?></label>
+                                             <input type="text" class="form-control" name="no_hp" id="no_hp" placeholder="No Hp" value="<?php echo $no_hp; ?>" />
+                                         </div>
+
+                                       <div class="form-group">
+                                          <label for="varchar">Kelas</label>
+                                          <select name="kelas" id="kelas" class="required form-control select2" title="Kelas">
+                                            <option value="">-- Pilih Kelas --</option>
+                                            <?php
+                                              if(!empty($list_kelas))
+                                              {
+                                                  $list_result = $list_kelas->result();
+                                                  foreach($list_result as $row)
+                                                  {
+                                            ?>
+                                                      <option value='<?=$row->id_kelas;?>' <?php if($row->id_kelas == $c_kelas) { echo 'selected'; } ?>><?=$row->nama_kelas;?></option>
+                                            <?php }
+                                              }
+                                            ?>
+                                          </select>
+                                      </div>
+
+                                      <div class="form-group">
+                                         <label for="varchar">Tahun Ajaran</label>
+                                         <select name="ajaran" id="ajaran" class="required form-control select2" title="Tahun Ajaran">
+                                           <?php
+                                             if(!empty($ajaran))
+                                             {
+                                                foreach($ajaran as $row)
+                                                {
+                                                ?>
+                                                  <option value="<?=$row->id_ajaran;?>" <?php if($row->id_ajaran == $c_ajaran) { echo 'selected'; } ?>><?=$row->nama_ajaran;?></option>
+                                                <?php }
+                                             }
+                                           ?>
+                                         </select>
+                                     </div>
+
+                                 	    <input type="hidden" name="id_siswa" value="<?php echo $id_siswa; ?>" />
+                                 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button>
+                                 	    <a href="<?php echo site_url('siswa') ?>" class="btn btn-default">Cancel</a>
+
+                                 </div>
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="white-box">
+  															<h3 class="box-title">Upload Gambar</h3>
+  															<label for="input-file-now">Ukuran gambar tidak lebih dari 1mb</label>
+  															<input type="file" id="foto" name="foto" class="dropify" />
+  														</div>
+                          </div>
+                        </form>
+                    </div>
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+
+
+
+                <!-- ============================================================== -->
+            </div>
+            <!-- /.container-fluid -->
+            <footer class="footer text-center"> 2019 &copy; Ashabul Yamin </footer>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page Content -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="<?=base_url();?>assets/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <!--slimscroll JavaScript -->
+    <script src="<?=base_url();?>assets/js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="<?=base_url();?>assets/js/waves.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="<?=base_url();?>assets/js/custom.min.js"></script>
+    <!--Style Switcher -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+
+
+    <script src="<?=base_url();?>assets/plugins/bower_components/dropify/dist/js/dropify.min.js"></script>
+    <script>
+
+    // Date Picker
+    jQuery('.mydatepicker, #datepicker').datepicker();
+    jQuery('#datepicker-autoclose').datepicker({
+        autoclose: true,
+        todayHighlight: true,
+        format: 'yyyy-mm-dd'
+    });
+    jQuery('#date-range').datepicker({
+        toggleActive: true,
+        format: 'yyyy-mm-dd'
+    });
+
+    </script>
+
+
+    <script>
+    $(document).ready(function() {
+        // Basic
+        $('.dropify').dropify();
+        // Translated
+        $('.dropify-fr').dropify({
+            messages: {
+                default: 'Glissez-déposez un fichier ici ou cliquez',
+                replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+                remove: 'Supprimer',
+                error: 'Désolé, le fichier trop volumineux'
+            }
+        });
+        // Used events
+        var drEvent = $('#input-file-events').dropify();
+        drEvent.on('dropify.beforeClear', function(event, element) {
+            return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+        });
+        drEvent.on('dropify.afterClear', function(event, element) {
+            alert('File deleted');
+        });
+        drEvent.on('dropify.errors', function(event, element) {
+            console.log('Has Errors');
+        });
+        var drDestroy = $('#input-file-to-destroy').dropify();
+        drDestroy = drDestroy.data('dropify')
+        $('#toggleDropify').on('click', function(e) {
+            e.preventDefault();
+            if (drDestroy.isDropified()) {
+                drDestroy.destroy();
+            } else {
+                drDestroy.init();
+            }
+        })
+    });
+    </script>
+
+</body>
+
+</html>

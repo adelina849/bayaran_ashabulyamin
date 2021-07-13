@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?=base_url();?>assets/plugins/images/favicon.png">
+    <title>Aplikasi Bayaran Sekolah Ashabul Yamin</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="<?=base_url();?>assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="<?=base_url();?>assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="<?=base_url();?>assets/css/animate.css" rel="stylesheet">
+    <!-- data table-->
+    <link href="<?=base_url();?>assets/plugins/bower_components/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <!-- Custom CSS -->
+    <link href="<?=base_url();?>assets/css/style.css" rel="stylesheet">
+    <!-- data table -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
+    <!-- color CSS -->
+    <link href="<?=base_url();?>assets/css/colors/blue.css" id="theme" rel="stylesheet">
+
+    <link rel="stylesheet" href="<?=base_url();?>assets/plugins/bower_components/dropify/dist/css/dropify.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.<?=base_url();?>assets/js/1.4.2/respond.min.js"></script>
+
+<![endif]-->
+    <style>
+        .dataTables_wrapper {
+            min-height: 500px
+        }
+
+        .dataTables_processing {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            margin-left: -50%;
+            margin-top: -25px;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            color:grey;
+        }
+
+        .user-bg{
+          height: 300px;
+        }
+    </style>
+
+</head>
+
+<body class="fix-header">
+    <!-- ============================================================== -->
+    <!-- Preloader -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+        </svg>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Wrapper -->
+    <!-- ============================================================== -->
+    <div id="wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+
+        <?php $this->load->view('admin/topbar.html'); ?>
+
+        <!-- End Top Navigation -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+
+        <?php $this->load->view('admin/sidebar.html'); ?>
+
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page Content -->
+        <!-- ============================================================== -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+              <div class="row bg-title">
+                  <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                      <h4 class="page-title">Akun Aplikasi</h4>
+                  </div>
+                  <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+
+                      <ol class="breadcrumb">
+                          <li><a href="<?=base_url();?>">Dashboard</a></li>
+                          <li class="active">Akun</li>
+                      </ol>
+                  </div>
+                  <!-- /.col-lg-12 -->
+                </div>
+
+                <!-- .row -->
+            <div class="row">
+                <div class="col-md-4 col-xs-12">
+                    <div class="white-box">
+                        <?php
+                          if($karyawan->avatar == '')
+                          {
+                            $src = 'noimage.png';
+                          } else {
+                            $src = $karyawan->avatar;
+                          }
+                        ?>
+                        <div class="user-bg"> <img width="100%" alt="user" src="<?=base_url('assets/images/member/').$src;?>">
+                            <div class="overlay-box">
+                                <div class="user-content">
+                                    <a href="javascript:void(0)"><img src="<?=base_url('assets/images/member/').$src;?>" class="thumb-lg img-circle" alt="img"></a>
+                                    <h4 class="text-white"><?=$akun->username;?></h4>
+                                    <h5 class="text-white"><?=$karyawan->email;?></h5> </div>
+                                    <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalTambah" data-backdrop="static" data-keyboard="false">Upload Gambar</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-8 col-xs-12">
+                    <div class="white-box">
+                        <ul class="nav nav-tabs tabs customtab">
+                            <li class="active tab">
+                                <a href="#home" data-toggle="tab"> <span class="visible-xs"><i class="fa fa-home"></i></span> <span class="hidden-xs">Profile</span> </a>
+                            </li>
+                            <li class="tab">
+                                <a href="#profile" data-toggle="tab"> <span class="visible-xs"><i class="fa fa-user"></i></span> <span class="hidden-xs">Setting</span> </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="home">
+                              <form class="form-horizontal" action="<?=base_url();?>C_akun/update_profile/" method="post">
+                                  <input type="hidden" name="id_karyawan" value="<?=$this->session->userdata('ses_id_karyawan');?>"/>
+
+                                  <div class="form-group">
+                                      <label class="col-md-12">Nama Lengkap</label>
+                                      <div class="col-md-12">
+                                          <input type="text" placeholder="Nama Lengkap" name="nama" value="<?=$karyawan->nama_karyawan;?>" required="" class="form-control form-control-line">
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="example-email" class="col-md-12">Email</label>
+                                      <div class="col-md-12">
+                                          <input type="email" value="<?=$karyawan->email;?>" placeholder="example@gmail.com" required="" class="form-control form-control-line" name="email" id="example-email">
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label class="col-md-12">Phone No</label>
+                                      <div class="col-md-12">
+                                          <input type="text" name="nohp" value="<?=$karyawan->tlp;?>" placeholder="0812 1234 5678" class="form-control">
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label class="col-md-12">Alamat</label>
+                                      <div class="col-md-12">
+                                          <textarea rows="3" name="alamat" class="form-control form-control-line"><?=$karyawan->alamat;?></textarea>
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <div class="col-sm-12">
+                                          <button type="submit" class="btn btn-success">Update Profile</button>
+                                      </div>
+                                  </div>
+                              </form>
+                            </div>
+                            <div class="tab-pane" id="profile">
+                              <form class="form-horizontal form-material" action="<?=base_url();?>C_akun/update_password/" method="post">
+                                  <!-- <div class="form-group">
+                                      <label class="col-md-12">Password Lama</label>
+                                      <div class="col-md-12">
+                                          <input type="password" required="" name="password_lama" value="" class="form-control form-control-line"> </div>
+                                  </div> -->
+                                  <input type="hidden" name="id_akun" value="<?=$this->session->userdata('ses_id_akun');?>"/>
+                                  <div class="form-group">
+                                      <label class="col-md-12">Password Baru</label>
+                                      <div class="col-md-12">
+                                          <input type="password" required="" name="password_baru" value="" class="form-control form-control-line"> </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label class="col-md-12">Konfirmasi Password</label>
+                                      <div class="col-md-12">
+                                          <input type="password" required="" name="password_konfirm" value="" class="form-control form-control-line"> </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                      <div class="col-sm-12">
+                                          <button class="btn btn-success">Update Password</button>
+                                      </div>
+                                  </div>
+                              </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+
+
+
+                <!-- ============================================================== -->
+            </div>
+            <!-- /.container-fluid -->
+            <footer class="footer text-center"> 2019 &copy; Ashabul Yamin </footer>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page Content -->
+        <!-- ============================================================== -->
+    </div>
+
+
+    <div id="modalTambah" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="mySmallModalLabel">Upload Gambar</h4>
+                </div>
+                <div class="modal-body">
+                  <form action="<?=base_url()?>C_akun/upload_gambar/" method="post" enctype="multipart/form-data">
+                    <div class="white-box">
+                        <input type="hidden" name="id" value="<?=$this->session->userdata('ses_id_karyawan');?>"/>
+                        <!-- <h3 class="box-title">Upload Gambar</h3> -->
+                        <!-- <label for="input-file-now">Ukuran gambar tidak lebih dari 1mb</label> -->
+                        <div class="form-group">
+                        <input type="file" id="foto" name="foto" class="dropify" />
+                        </div>
+                          <button type="submit" class="btn btn-info">Upload</button>
+
+                    </div>
+                  </form>
+                </div>
+          </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="<?=base_url();?>assets/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <!--slimscroll JavaScript -->
+    <script src="<?=base_url();?>assets/js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="<?=base_url();?>assets/js/waves.js"></script>
+    <!-- data table -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="<?=base_url();?>assets/js/custom.min.js"></script>
+    <!--Style Switcher -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+
+    <script src="<?=base_url();?>assets/plugins/bower_components/dropify/dist/js/dropify.min.js"></script>
+
+    <script>
+    $(document).ready(function() {
+        // Basic
+        $('.dropify').dropify();
+        // Translated
+        $('.dropify-fr').dropify({
+            messages: {
+                default: 'Glissez-déposez un fichier ici ou cliquez',
+                replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+                remove: 'Supprimer',
+                error: 'Désolé, le fichier trop volumineux'
+            }
+        });
+        // Used events
+        var drEvent = $('#input-file-events').dropify();
+        drEvent.on('dropify.beforeClear', function(event, element) {
+            return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+        });
+        drEvent.on('dropify.afterClear', function(event, element) {
+            alert('File deleted');
+        });
+        drEvent.on('dropify.errors', function(event, element) {
+            console.log('Has Errors');
+        });
+        var drDestroy = $('#input-file-to-destroy').dropify();
+        drDestroy = drDestroy.data('dropify')
+        $('#toggleDropify').on('click', function(e) {
+            e.preventDefault();
+            if (drDestroy.isDropified()) {
+                drDestroy.destroy();
+            } else {
+                drDestroy.init();
+            }
+        })
+    });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings)
+            {
+                return {
+                    "iStart": oSettings._iDisplayStart,
+                    "iEnd": oSettings.fnDisplayEnd(),
+                    "iLength": oSettings._iDisplayLength,
+                    "iTotal": oSettings.fnRecordsTotal(),
+                    "iFilteredTotal": oSettings.fnRecordsDisplay(),
+                    "iPage": Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength),
+                    "iTotalPages": Math.ceil(oSettings.fnRecordsDisplay() / oSettings._iDisplayLength)
+                };
+            };
+
+            var t = $("#mytable").dataTable({
+                initComplete: function() {
+                    var api = this.api();
+                    $('#mytable_filter input')
+                            .off('.DT')
+                            .on('keyup.DT', function(e) {
+                                if (e.keyCode == 13) {
+                                    api.search(this.value).draw();
+                        }
+                    });
+                },
+                oLanguage: {
+                    sProcessing: "loading..."
+                },
+                processing: true,
+                serverSide: true,
+                ajax: {"url": "c_akun/json", "type": "POST"},
+                columns: [
+                    {
+                        "data": "id_akun",
+                        "orderable": false
+                    },{"data": "id_karyawan"},{"data": "username"},{"data": "pass"},{"data": "ket_akun"},
+                    {
+                        "data" : "action",
+                        "orderable": false,
+                        "className" : "text-center"
+                    }
+                ],
+                order: [[0, 'desc']],
+                rowCallback: function(row, data, iDisplayIndex) {
+                    var info = this.fnPagingInfo();
+                    var page = info.iPage;
+                    var length = info.iLength;
+                    var index = page * length + (iDisplayIndex + 1);
+                    $('td:eq(0)', row).html(index);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

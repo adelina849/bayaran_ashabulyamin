@@ -1,0 +1,100 @@
+<style type="text/css">
+  #side-menu>li>a {
+    padding : 10px 35px 10px 20px;
+  }
+
+
+</style>
+
+<!-- ============================================================== -->
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav slimscrollsidebar">
+        <div class="sidebar-head">
+            <h3><span class="fa-fw open-close"><i class="ti-menu hidden-xs"></i><i class="ti-close visible-xs"></i></span> <span class="hide-menu">Navigation</span></h3> </div>
+        <ul class="nav" id="side-menu">
+            <li> <a href="<?=base_url();?>home" class="waves-effect"><i  class="mdi mdi-home fa-fw"></i> <span class="hide-menu">Beranda</span></a> </li>
+            <li> <a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-database fa-fw"></i>
+              <span class="hide-menu">Master Data<span class="fa arrow"></span></span></a>
+              <ul class="nav nav-second-level">
+
+                  <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe04b;" class="linea-icon linea-aerrow fa-fw"></i><span class="hide-menu">Karyawan </span><span class="fa arrow"></span></a>
+                      <ul class="nav nav-third-level">
+                        <li> <a href="<?=base_url();?>karyawan"><i data-icon="/" class="mdi mdi-account-multiple fa-fw"></i><span class="hide-menu">Karyawan</span></a> </li>
+                        <li> <a href="<?=base_url();?>jabatan"><i data-icon="7" class="mdi mdi-account-star fa-fw"></i><span class="hide-menu">Jabatan</span></a> </li>
+                      </ul>
+                  </li>
+
+
+                  <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe04b;" class="linea-icon linea-aerrow fa-fw"></i><span class="hide-menu">Bayaran </span><span class="fa arrow"></span></a>
+                      <ul class="nav nav-third-level">
+                        <li> <a href="<?=base_url();?>kat-bayaran"><i data-icon="7" class="mdi mdi-wallet fa-fw"></i><span class="hide-menu">Kategori Bayaran</span></a> </li>
+                        <li> <a href="<?=base_url();?>bayaran"><i data-icon="7" class="mdi mdi-wallet fa-fw"></i><span class="hide-menu">Bayaran</span></a> </li>
+                        <li> <a href="<?=base_url();?>pengurang-bayaran"><i data-icon="7" class="mdi mdi-wallet-membership fa-fw"></i><span class="hide-menu">Pengurang-Bayaran</span></a> </li>
+                      </ul>
+                  </li>
+
+                  <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe04b;" class="linea-icon linea-aerrow fa-fw"></i><span class="hide-menu">Akuntansi </span><span class="fa arrow"></span></a>
+                      <ul class="nav nav-third-level">
+                        <li> <a href="<?=base_url();?>bank"><i data-icon="7" class="mdi mdi-credit-card-plus fa-fw"></i><span class="hide-menu">Bank</span></a> </li>
+                        <li> <a href="<?=base_url();?>kat-uang-masuk"><i data-icon="7" class="mdi mdi-credit-card-plus fa-fw"></i><span class="hide-menu">Kat. Uang Masuk</span></a> </li>
+                        <li> <a href="<?=base_url();?>kat-uang-keluar"><i data-icon="7" class="mdi mdi-server-minus fa-fw"></i><span class="hide-menu">Kat. Uang Keluar</span></a> </li>
+                      </ul>
+                  </li>
+
+                  <li> <a href="<?=base_url()?>semester"><i data-icon="7" class="mdi mdi-calendar-clock fa-fw"></i><span class="hide-menu">Semester</span></a> </li>
+                  <li> <a href="<?=base_url()?>tahun-ajaran"><i data-icon="7" class="mdi mdi-calendar-clock fa-fw"></i><span class="hide-menu">Tahun Ajaran</span></a> </li>
+                  <li> <a href="<?=base_url();?>kelas"><i data-icon="7" class="mdi mdi-table-large fa-fw"></i><span class="hide-menu">Kelas</span></a> </li>
+                  <li> <a href="<?=base_url();?>siswa"><i data-icon="7" class="mdi mdi-account-box fa-fw"></i><span class="hide-menu">Siswa</span></a> </li>
+
+
+
+
+
+
+
+                  <li> <a href="<?=base_url();?>proyek"><i data-icon="7" class="mdi mdi-clipboard fa-fw"></i><span class="hide-menu">Proyek</span></a> </li>
+
+              </ul>
+            </li>
+
+            <li> <a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-table-edit fa-fw"></i>
+              <span class="hide-menu">Proses Data<span class="fa arrow"></span></span></a>
+              <ul class="nav nav-second-level">
+                  <li> <a href="<?=base_url();?>2-kelas-siswa"><i data-icon="/" class="mdi mdi-book-open-page-variant fa-fw"></i><span class="hide-menu">Kelas Siswa</span></a> </li>
+                  <li> <a href="<?=base_url();?>2-bayaran-kelas"><i data-icon="/" class="mdi mdi-coin fa-fw"></i><span class="hide-menu">Bayaran Kelas</span></a> </li>
+                  <li> <a href="<?=base_url();?>2-bayaran-siswa"><i data-icon="/" class="mdi mdi-coin fa-fw"></i><span class="hide-menu">Bayaran Siswa</span></a> </li>
+                  <li> <a href="<?=base_url();?>2-bayaran-pengurang"><i data-icon="/" class="mdi mdi-coin fa-fw"></i><span class="hide-menu">Bayaran Pengurang</span></a> </li>
+              </ul>
+            </li>
+
+            <li> <a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-sync fa-fw"></i>
+              <span class="hide-menu">Transaksi<span class="fa arrow"></span></span></a>
+              <ul class="nav nav-second-level">
+                  <li> <a href="<?=base_url();?>3-bayaran"><i data-icon="/" class="mdi mdi-book-open-page-variant fa-fw"></i><span class="hide-menu">Bayaran</span></a> </li>
+                  <li> <a href="<?=base_url();?>3-uang-masuk"><i data-icon="/" class="mdi mdi-basket-fill fa-fw"></i><span class="hide-menu">Uang Masuk</span></a> </li>
+                  <li> <a href="<?=base_url();?>3-uang-keluar"><i data-icon="/" class="mdi mdi-basket-unfill fa-fw"></i><span class="hide-menu">Uang Keluar</span></a> </li>
+              </ul>
+            </li>
+
+            <li> <a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-file-chart fa-fw"></i>
+              <span class="hide-menu">Laporan<span class="fa arrow"></span></span></a>
+              <ul class="nav nav-second-level">
+                  <li> <a href="<?=base_url();?>laporan-keuangan"><i data-icon="/" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Laporan Keuangan</span></a> </li>
+                  <!-- <li> <a href="javascript:void(0)"><i data-icon="/" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">laporan</span></a> </li> -->
+              </ul>
+            </li>
+
+            <li> <a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-settings fa-fw"></i>
+              <span class="hide-menu">Setting<span class="fa arrow"></span></span></a>
+              <ul class="nav nav-second-level">
+                  <li> <a href="<?=base_url('akun-setting');?>"><i data-icon="/" class="mdi mdi-account-convert fa-fw"></i><span class="hide-menu">Akun</span></a> </li>
+                  <!-- <li> <a href="javascript:void(0)"><i data-icon="/" class="mdi mdi-account-key fa-fw"></i><span class="hide-menu">Hak Akses</span></a> </li> -->
+              </ul>
+            </li>
+
+            <li> <a href="<?=base_url();?>logout" class="waves-effect"><i  class="mdi mdi-exit-to-app fa-fw"></i> <span class="hide-menu">Keluar</span></a> </li>
+
+        </ul>
+    </div>
+</div>
+<!-- ============================================================== -->

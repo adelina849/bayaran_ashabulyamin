@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?=base_url();?>assets/plugins/images/favicon.png">
+    <title>Aplikasi Bayaran Sekolah Ashabul Yamin</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="<?=base_url();?>assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="<?=base_url();?>assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="<?=base_url();?>assets/css/animate.css" rel="stylesheet">
+    <!-- data table-->
+    <link href="<?=base_url();?>assets/plugins/bower_components/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <!-- Custom CSS -->
+    <link href="<?=base_url();?>assets/css/style.css" rel="stylesheet">
+    <!-- color CSS -->
+    <link href="<?=base_url();?>assets/css/colors/blue.css" id="theme" rel="stylesheet">
+
+    <!-- Date picker plugins css -->
+    <link href="<?=base_url();?>assets/plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.<?=base_url();?>assets/js/1.4.2/respond.min.js"></script>
+
+<![endif]-->
+
+</head>
+
+<body class="fix-header">
+    <!-- ============================================================== -->
+    <!-- Preloader -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+        </svg>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Wrapper -->
+    <!-- ============================================================== -->
+    <div id="wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+
+        <?php $this->load->view('admin/topbar.html'); ?>
+
+        <!-- End Top Navigation -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+
+        <?php $this->load->view('admin/sidebar.html'); ?>
+
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page Content -->
+        <!-- ============================================================== -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+              <div class="row bg-title">
+                  <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                      <h4 class="page-title">Kategori Uang Masuk</h4> </div>
+                        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                            <ol class="breadcrumb">
+                                <li><a href="<?=base_url();?>">Dashboard</a></li>
+                                <li><a href="<?=base_url();?>3-uang-masuk">Tran. Uang Masuk</a></li>
+                                <li class="active">Input Kat. Uang Masuk</li>
+                            </ol>
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                               <div class="panel-heading">
+
+                               </div>
+                               <div class="panel-body">
+                                 <form action="<?php echo $action; ?>" method="post">
+                                 	    <!-- <div class="form-group">
+                                             <label for="varchar">Id Kat Uang Keluar <?php echo form_error('id_kat_uang_keluar') ?></label>
+                                             <input type="text" class="form-control" name="id_kat_uang_keluar" id="id_kat_uang_keluar" placeholder="Id Kat Uang Keluar" value="<?php echo $id_kat_uang_keluar; ?>" />
+                                         </div> -->
+
+                                      <div class="form-group">
+                                          <label for="varchar">Kategori Uang Keluar  <?php echo form_error('id_kat_uang_keluar') ?></label>
+                                          <select name="id_kat_uang_keluar" id="id_kat_uang_keluar" class="required form-control select2" title="Kategori Uang Keluar">
+                                            <option value="">-- Pilih Kategori --</option>
+                                            <?php
+                                              if(!empty($list_kat))
+                                              {
+                                                  foreach($list_kat as $row)
+                                                  {
+                                            ?>
+                                                      <option value='<?=$row->id_kat_uang_keluar;?>' <?php if($row->id_kat_uang_keluar == $c_kat) { echo 'selected'; } ?>><?=$row->nama_kat_uang_keluar;?></option>
+                                            <?php }
+                                              }
+                                            ?>
+                                          </select>
+                                      </div>
+
+                                      <div class="form-group">
+                                          <label for="varchar">Rekening Bank (Optional) <?php echo form_error('id_bank') ?></label>
+                                          <select name="id_bank" id="id_bank" class="required form-control select2" title="Rekening Bank">
+                                            <option value="">-- Pilih Rekening --</option>
+                                            <?php
+                                              if(!empty($list_bank))
+                                              {
+                                                  foreach($list_bank as $row)
+                                                  {
+                                            ?>
+                                                      <option value='<?=$row->id_bank;?>' <?php if($row->id_bank == $c_bank) { echo 'selected'; } ?>><?=$row->nama_bank;?> (<?=$row->norek;?>)</option>
+                                            <?php }
+                                              }
+                                            ?>
+                                          </select>
+                                      </div>
+
+
+                                      <div class="form-group">
+                                        <label for="varchar">Proyek (Optional) <?php echo form_error('id_proyek') ?></label>
+                                        <div class="input-group m-b-30">
+                                            <input type="hidden" name="id_proyek" id="id_proyek" value="<?php echo $id_proyek; ?>"/>
+                                            <input disabled class="form-control" name="nama_proyek" id="nama_proyek" value="<?php echo $c_proyek; ?>" placeholder="Pilih Proyek..." />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-info" onclick="showListProyek()" type="button" data-toggle="modal" data-target="#modalProyek" data-backdrop="static" data-keyboard="false">Cari</button>
+                                            </span>
+                                        </div>
+                                      </div>
+
+                                 	    <div class="form-group">
+                                             <label for="varchar">No Uang Keluar <?php echo form_error('no_uang_keluar') ?></label>
+                                             <input type="text" class="form-control" name="no_uang_keluar" id="no_uang_keluar" placeholder="No Uang Keluar" value="<?php echo $no_uang_keluar; ?>" />
+                                         </div>
+                                 	    <div class="form-group">
+                                             <label for="varchar">Nama Uang Keluar <?php echo form_error('nama_uang_keluar') ?></label>
+                                             <input type="text" class="form-control" name="nama_uang_keluar" id="nama_uang_keluar" placeholder="Nama Uang Keluar" value="<?php echo $nama_uang_keluar; ?>" />
+                                         </div>
+                                 	    <div class="form-group">
+                                             <label for="varchar">Diberikan Kepada <?php echo form_error('diberikan_kepada') ?></label>
+                                             <input type="text" class="form-control" name="diberikan_kepada" id="diberikan_kepada" placeholder="Diberikan Kepada" value="<?php echo $diberikan_kepada; ?>" />
+                                         </div>
+                                 	    <div class="form-group">
+                                             <label for="varchar">Diberikan Oleh <?php echo form_error('diberikan_oleh') ?></label>
+                                             <input type="text" class="form-control" name="diberikan_oleh" id="diberikan_oleh" placeholder="Diberikan Oleh" value="<?php echo $diberikan_oleh; ?>" />
+                                         </div>
+                                 	    <div class="form-group">
+                                             <label for="float">Nominal <?php echo form_error('nominal') ?></label>
+                                             <input type="number" class="form-control" name="nominal" id="nominal" placeholder="Nominal" value="<?php echo $nominal; ?>" />
+                                         </div>
+
+                                    <input type="hidden" name="jenis" id="jenis" value="<?php echo $jenis; ?>" />
+
+
+                                     <div class="form-group">
+                                        <label for="date">Tanggal Dikeluarkan <?php echo form_error('tgl_dikeluarkan') ?></label>
+                                        <div class="input-group">
+                                           <input type="text" name="tgl_dikeluarkan" class="form-control" value="<?php echo $tgl_dikeluarkan; ?>" id="datepicker-autoclose" placeholder="yyyy/mm/dd"> <span class="input-group-addon"><i class="icon-calender"></i></span>
+                                        </div>
+                                     </div>
+
+                                     <div class="form-group">
+                                        <label for="date">Tanggal Diterima <?php echo form_error('tgl_diterima') ?></label>
+                                        <div class="input-group">
+                                           <input type="text" name="tgl_diterima" class="form-control" value="<?php echo $tgl_diterima; ?>" id="datepicker-autoclose2" placeholder="yyyy/mm/dd"> <span class="input-group-addon"><i class="icon-calender"></i></span>
+                                        </div>
+                                     </div>
+
+                                     <div class="form-group">
+                                          <label for="untuk">Keterangan <?php echo form_error('untuk') ?></label>
+                                          <textarea class="form-control" rows="3" name="untuk" id="untuk" placeholder="Untuk"><?php echo $untuk; ?></textarea>
+                                      </div>
+
+
+                                 	    <input type="hidden" name="id_uang_keluar" value="<?php echo $id_uang_keluar; ?>" />
+                                 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button>
+                                 	    <a href="<?php echo site_url('c_uang_keluar') ?>" class="btn btn-default">Cancel</a>
+                                 	</form>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+
+
+
+                <!-- ============================================================== -->
+            </div>
+            <!-- /.container-fluid -->
+            <footer class="footer text-center"> 2019 &copy; Ashabul Yamin </footer>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page Content -->
+        <!-- ============================================================== -->
+    </div>
+
+    <div id="modalProyek" class="modal fade bs-example-modal-lg in" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                List Proyek
+              </div>
+              <div class="modal-body">
+                <table class="table table-bordered" >
+                  <thead>
+                    <tr>
+                          <th width="7%">#</th>
+                           <th width="30%">Nama Proyek</th>
+                           <th width="25%">Penanggung Jawab</th>
+                           <th width="15%">Nominal</th>
+                           <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="table_proyek">
+
+
+                  </tbody>
+                </table>
+              </div>
+              <div class="modal-footer">
+                  <!-- <button class="btn btn-info" onclick="return confirm('Apakah anda yakin?')" type="submit"> Proses Pembayaran </button> -->
+                  <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="<?=base_url();?>assets/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <!--slimscroll JavaScript -->
+    <script src="<?=base_url();?>assets/js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="<?=base_url();?>assets/js/waves.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="<?=base_url();?>assets/js/custom.min.js"></script>
+    <!--Style Switcher -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+
+    <script>
+
+    // Date Picker
+    jQuery('.mydatepicker, #datepicker').datepicker();
+    jQuery('#datepicker-autoclose').datepicker({
+        autoclose: true,
+        todayHighlight: true,
+        format: 'yyyy-mm-dd'
+    });
+
+    jQuery('#datepicker-autoclose2').datepicker({
+        autoclose: true,
+        todayHighlight: true,
+        format: 'yyyy-mm-dd'
+    });
+    jQuery('#date-range').datepicker({
+        toggleActive: true,
+        format: 'yyyy-mm-dd'
+    });
+
+    </script>
+    <script type="text/javascript">
+      function showListProyek()
+      {
+        $.post("<?=base_url();?>index.php/C_uang_keluar/list_proyek/",
+  			{
+  				id: '',
+  			},
+  			function(data, status){
+  				//alert(data);
+  				if(data)
+  				{
+            $('#table_proyek').html(data);
+  				} else {
+
+  				}
+  			});
+      }
+
+      function pilihProyek(id)
+      {
+        console.log($('#nama_'+id).val());
+        $('input[name=nama_proyek]').val($('#nama_'+id).val());
+        $('input[name=id_proyek]').val($('#no2_'+id).val());
+
+      }
+    </script>
+
+</body>
+
+</html>

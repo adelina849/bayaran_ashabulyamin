@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?=base_url();?>assets/plugins/images/favicon.png">
+    <title>Aplikasi Bayaran Sekolah Ashabul Yamin</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="<?=base_url();?>assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="<?=base_url();?>assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="<?=base_url();?>assets/css/animate.css" rel="stylesheet">
+    <!-- data table-->
+    <link href="<?=base_url();?>assets/plugins/bower_components/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <!-- Custom CSS -->
+    <link href="<?=base_url();?>assets/css/style.css" rel="stylesheet">
+    <!-- data table -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
+    <!-- color CSS -->
+    <link href="<?=base_url();?>assets/css/colors/blue.css" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.<?=base_url();?>assets/js/1.4.2/respond.min.js"></script>
+
+<![endif]-->
+    <style>
+        .dataTables_wrapper {
+            min-height: 500px
+        }
+
+        .dataTables_processing {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            margin-left: -50%;
+            margin-top: -25px;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            color:grey;
+        }
+    </style>
+
+</head>
+
+<body class="fix-header">
+    <!-- ============================================================== -->
+    <!-- Preloader -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+        </svg>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Wrapper -->
+    <!-- ============================================================== -->
+    <div id="wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+
+        <?php $this->load->view('admin/topbar.html'); ?>
+
+        <!-- End Top Navigation -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+
+        <?php $this->load->view('admin/sidebar.html'); ?>
+
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page Content -->
+        <!-- ============================================================== -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+              <div class="row bg-title">
+                  <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                      <h4 class="page-title">Transaksi Pembayaran</h4> </div>
+                        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                            <ol class="breadcrumb">
+                                <li><a href="<?=base_url();?>">Dashboard</a></li>
+                                <li><a href="<?=base_url();?>3-bayaran">Transaksi Pembayaran</a></li>
+                                <li class="active">Detail</li>
+                            </ol>
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-4">
+                          <div class="panel panel-default">
+                             <div class="panel-heading">
+                               Informasi Siswa
+                             </div>
+                             <div class="panel-wrapper collapse in">
+                               <div class="panel-body">
+                                 <table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+                                <tbody>
+                                  <tr>
+                                    <td><strong>NIS Siswa</strong>
+                                      <p style="margin-top:10px;"><?=$detail->kode_siswa;?></p></td>
+                                  </tr>
+                                  <tr>
+                                    <td><strong>Nama Lengkap</strong>
+                                      <p style="margin-top:10px;"><?=$detail->nama_siswa;?></p></td>
+                                  </tr>
+                                  <tr>
+                                    <td><strong>Tahun Ajaran</strong>
+                                      <p style="margin-top:10px;"><?=$detail->nama_ajaran;?></p></td>
+                                  </tr>
+                                  <tr>
+                                    <td><strong>Kelas</strong>
+                                      <p style="margin-top:10px;"><?=$detail->nama_kelas;?></p></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+
+                               </div>
+                               <div class="panel-footer">
+                                 <!-- <a href="#" data-toggle="modal" data-target="#modalTambah" data-backdrop="static" data-keyboard="false" class="btn btn-success waves-effect waves-light">Tambah Transaksi</a> -->
+                               </div>
+                             </div>
+                          </div>
+
+
+                      </div>
+                      <div class="col-md-8">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                          <div class="panel panel-default">
+                             <div class="panel-heading">
+                                  <div class="row">
+                                    <form action="<?=base_url();?>detail-bayaran/<?php echo $this->uri->segment(2,0).'?'.http_build_query($_GET); ?>" method="get">
+                                          <div class="col-md-12">
+                                              Tagihan Bulanan
+                                          </div>
+
+
+                                          <!--<div class="col-md-3">
+                                             <div class="form-group">
+                                               <select name="id_kat_bayaran" id="id_kat_bayaran" class="required form-control select2" title="Jenis Bayaran">
+                                                 <option value='' >-- Jenis Bayaran --</option>
+                                                 <?php
+                                                   if(!empty($list_kat_bayaran))
+                                                   {
+                                                       foreach($list_kat_bayaran as $row)
+                                                       {
+                                                 ?>
+                                                       <option <?php
+                                                         if(!empty($_GET['id_kat_bayaran']))
+                                                         {
+                                                           if($_GET['id_kat_bayaran'] == $row->id_kat_bayaran)
+                                                           {
+                                                             echo 'selected';
+                                                           }
+                                                         } ?> value="<?=$row->id_kat_bayaran;?>"><?=$row->nama_kat_bayaran;?></option>
+                                                 <?php }
+                                                   }
+                                                 ?>
+                                               </select>
+                                           </div>
+                                          </div>-->
+
+                                          <!-- <div class="col-md-3">
+                                            <div class="form-group">
+                                              <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Tampilkan</button>
+                                            </div>
+                                          </div> -->
+
+
+                                    </form>
+                                  </div>
+                             </div>
+                             <div class="panel-body">
+                               <table class="table table-bordered" id="mytable">
+                                   <thead>
+                                       <tr>
+                                           <th width="7%">#</th>
+                                            <th width="15%">Periode</th>
+                                            <th width="15%">Tagihan</th>
+                                            <th width="15%">Sisa Bayar</th>
+                                            <th width="20%">Status</th>
+                                            <th>Action</th>
+                                       </tr>
+                                   </thead>
+                                   <!-- echo '<td>'.$row->tgl_bayar.'</td>'; -->
+                                   <?php
+                                    if(!empty($laporan_bayaran))
+                                    {
+                                        $noxx=1;
+                                        $total_tagihan=0;
+                                        $total_sisa=0;
+
+                                        $c_periode = date('Y-m');
+
+                                        echo '<tbody>';
+
+                                        foreach($laporan_bayaran as $row)
+                                        {
+                                            if($row->status_bayar == 'Lunas')
+                                            {
+                                                echo '<tr class="success">';
+                                            } else {
+                                                echo '<tr>';
+                                            }
+
+                                            echo '<td><input type="hidden" id="id_tran_'.$noxx.'" name="id_tran_'.$noxx.'" value="'.$row->id_tran.'" />'.$noxx.'</td>';
+                                            echo '<td><input type="hidden" id="periode_'.$noxx.'" name="periode_'.$noxx.'" value="'.$row->periode.'" />'.$row->periode.'</td>';
+                                            echo '<td class="text-right"><input type="hidden" id="id_kat_bayaran_'.$noxx.'" name="id_kat_bayaran_'.$noxx.'" value="'.$row->id_kat_bayaran.'" />'.number_format($row->biaya).'</td>';
+                                            echo '<td class="text-right"><input type="hidden" id="sisa_bayar_'.$noxx.'" name="sisa_bayar_'.$noxx.'" value="'.$row->sisa_bayar.'" />'.number_format($row->sisa_bayar).'</td>';
+                                            echo '<td><input type="hidden" id="id_siswa_'.$noxx.'" name="id_siswa_'.$noxx.'" value="'.$row->id_siswa.'" />'.$row->status_bayar.'</td>';
+
+                                            if($row->biaya > 0)
+                                            {
+
+                                              if($row->status_bayar == 'Lunas')
+                                              {
+                                                echo '<td>';
+                                                echo '<a href="#" data-toggle="modal" onclick="showListCetak('.$noxx.')" data-target="#modalCetak" data-backdrop="static" data-keyboard="false" > <i class="mdi mdi-view-list text-success"></i> Lihat </a>';
+                                                echo '<a href="'.base_url().'C_tran_siswa/cetak_all/'.$row->periode.'/'.$row->id_siswa.'" target="_blank"><i class="mdi mdi-printer text-success"></i> Cetak </a>';
+                                                echo '</td>';
+                                              } else if($row->status_bayar == 'Belum Lunas') {
+                                                echo '<td>
+                                                  <a href="#" data-toggle="modal" onclick="showListCetak('.$noxx.')" data-target="#modalCetak" data-backdrop="static" data-keyboard="false" > <i class="mdi mdi-view-list text-success"></i> Lihat </a>
+                                                  <a href="'.base_url().'input-transaksi/'.$row->id_siswa.'/'.$row->periode.'" data-toggle="tooltip" data-original-title=""> <i class="mdi mdi-check-circle text-danger"></i> Bayar </a>
+                                                  <a href="'.base_url().'C_tran_siswa/cetak_all/'.$row->periode.'/'.$row->id_siswa.'" target="_blank"><i class="mdi mdi-printer text-success"></i> Cetak </a>
+                                                    </td>';
+                                              } else {
+                                                  echo '<td>';
+                                                  echo '<a href="'.base_url().'input-transaksi/'.$row->id_siswa.'/'.$row->periode.'" data-toggle="tooltip" data-original-title=""> <i class="mdi mdi-check-circle text-danger"></i> Bayar </a>';
+                                                  echo '</td>';
+                                              }
+                                            } else {
+                                              echo '<td></td>';
+                                            }
+
+                                            echo '</tr>';
+
+                                            $total_tagihan +=$row->biaya;
+                                            $total_sisa +=$row->sisa_bayar;
+
+                                            $noxx++;
+                                        }
+                                  ?>
+                                      <tr>
+                                        <td></td>
+                                        <td><strong>Total</strong></td>
+                                        <td class="text-right"><strong><?=number_format($total_tagihan);?></strong></td>
+                                        <td class="text-right"><strong><?=number_format($total_sisa);?></strong></td>
+                                        <td></td>
+                                        <td></td>
+                                      </tr>
+                                  <?php
+                                        echo '</tbody>';
+                                    }
+                                   ?>
+                               </table>
+                             </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-8">
+                          <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="panel panel-default">
+                               <div class="panel-heading">
+                                    <div class="row">
+                                      <form action="<?=base_url();?>detail-bayaran/<?php echo $this->uri->segment(2,0).'?'.http_build_query($_GET); ?>" method="get">
+                                            <div class="col-md-12">
+                                                Tagihan Semester
+                                            </div>
+                                      </form>
+                                    </div>
+                               </div>
+                               <div class="panel-body">
+                                 <table class="table table-bordered" id="mytable">
+                                     <thead>
+                                         <tr>
+                                             <th width="7%">#</th>
+                                              <th width="15%">Periode</th>
+                                              <th width="15%">Tagihan</th>
+                                              <th width="15%">Sisa Bayar</th>
+                                              <th width="20%">Status</th>
+                                              <th>Action</th>
+                                         </tr>
+                                     </thead>
+                                     <!-- echo '<td>'.$row->tgl_bayar.'</td>'; -->
+                                     <?php
+                                      if(!empty($tagihan_semester))
+                                      {
+                                          //$noxx=1;
+                                          $total_tagihan=0;
+                                          $total_sisa=0;
+                                          $c_periode = date('Y-m');
+
+                                          echo '<tbody>';
+
+                                          foreach($tagihan_semester as $row)
+                                          {
+                                              if($row->status_bayar == 'Lunas')
+                                              {
+                                                  echo '<tr class="success">';
+                                              } else {
+                                                  echo '<tr>';
+                                              }
+
+                                              echo '<td><input type="hidden" id="id_tran_'.$noxx.'" name="id_tran_'.$noxx.'" value="'.$row->id_tran.'" />'.$noxx.'</td>';
+                                              echo '<td><input type="hidden" id="periode_'.$noxx.'" name="periode_'.$noxx.'" value="'.$row->periode.'" />'.$row->kode_semester.'</td>';
+                                              echo '<td class="text-right"><input type="hidden" id="id_kat_bayaran_'.$noxx.'" name="id_kat_bayaran_'.$noxx.'" value="'.$row->id_kat_bayaran.'" />'.number_format($row->biaya).'</td>';
+                                              echo '<td class="text-right"><input type="hidden" id="sisa_bayar_'.$noxx.'" name="sisa_bayar_'.$noxx.'" value="'.$row->sisa_bayar.'" />'.number_format($row->sisa_bayar).'</td>';
+                                              echo '<td><input type="hidden" id="id_siswa_'.$noxx.'" name="id_siswa_'.$noxx.'" value="'.$row->id_siswa.'" />'.$row->status_bayar.'</td>';
+
+                                              if($row->biaya > 0)
+                                              {
+
+                                                if($row->status_bayar == 'Lunas')
+                                                {
+                                                  echo '<td>';
+                                                  echo '<a href="#" data-toggle="modal" onclick="showListCetak('.$noxx.')" data-target="#modalCetak" data-backdrop="static" data-keyboard="false" > <i class="mdi mdi-view-list text-success"></i> Lihat </a>';
+                                                  echo '<a href="'.base_url().'C_tran_siswa/cetak_semester_all/'.$row->periode.'/'.$row->id_siswa.'" target="_blank"><i class="mdi mdi-printer text-success"></i> Cetak </a>';
+                                                  echo '</td>';
+                                                } else if($row->status_bayar == 'Belum Lunas') {
+                                                  echo '<td>
+                                                    <a href="#" data-toggle="modal" onclick="showListCetak('.$noxx.')" data-target="#modalCetak" data-backdrop="static" data-keyboard="false" > <i class="mdi mdi-view-list text-success"></i> Lihat </a>
+                                                    <a href="'.base_url().'input-semester/'.$row->id_siswa.'/'.$row->periode.'" data-toggle="tooltip" data-original-title=""> <i class="mdi mdi-check-circle text-danger"></i> Bayar </a>
+                                                    <a href="'.base_url().'C_tran_siswa/cetak_semester_all/'.$row->periode.'/'.$row->id_siswa.'" target="_blank"><i class="mdi mdi-printer text-success"></i> Cetak </a>
+                                                      </td>';
+                                                } else {
+                                                    echo '<td>';
+                                                    echo '<a href="'.base_url().'input-semester/'.$row->id_siswa.'/'.$row->periode.'" data-toggle="tooltip" data-original-title=""> <i class="mdi mdi-check-circle text-danger"></i> Bayar </a>';
+                                                    echo '</td>';
+                                                }
+                                              } else {
+                                                echo '<td></td>';
+                                              }
+
+                                              echo '</tr>';
+
+                                              $total_tagihan +=$row->biaya;
+                                              $total_sisa +=$row->sisa_bayar;
+                                              $noxx++;
+                                          }
+                                          ?>
+                                              <tr>
+                                                <td></td>
+                                                <td><strong>Total</strong></td>
+                                                <td class="text-right"><strong><?=number_format($total_tagihan);?></strong></td>
+                                                <td class="text-right"><strong><?=number_format($total_sisa);?></strong></td>
+                                                <td></td>
+                                                <td></td>
+                                              </tr>
+                                          <?php
+                                          echo '</tbody>';
+                                      }
+                                     ?>
+                                 </table>
+                               </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="row">
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-8">
+                          <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="panel panel-default">
+                               <div class="panel-heading">
+                                    <div class="row">
+                                      <form action="<?=base_url();?>detail-bayaran/<?php echo $this->uri->segment(2,0).'?'.http_build_query($_GET); ?>" method="get">
+                                            <div class="col-md-12">
+                                                Tagihan Tahunan
+                                            </div>
+                                      </form>
+                                    </div>
+                               </div>
+                               <div class="panel-body">
+                                 <table class="table table-bordered" id="mytable">
+                                     <thead>
+                                         <tr>
+                                             <th width="7%">#</th>
+                                              <th width="15%">Tahun Ajaran</th>
+                                              <th width="15%">Tagihan</th>
+                                              <th width="15%">Sisa Bayar</th>
+                                              <th width="20%">Status</th>
+                                              <th>Action</th>
+                                         </tr>
+                                     </thead>
+                                     <!-- echo '<td>'.$row->tgl_bayar.'</td>'; -->
+                                     <?php
+                                      if(!empty($tagihanTahunan))
+                                      {
+                                          //$noxx=1;
+                                          $total_tagihan=0;
+                                          $total_sisa=0;
+                                          $c_periode = date('Y-m');
+
+                                          echo '<tbody>';
+
+                                          foreach($tagihanTahunan as $row)
+                                          {
+                                              if($row->status_bayar == 'Lunas')
+                                              {
+                                                  echo '<tr class="success">';
+                                              } else {
+                                                  echo '<tr>';
+                                              }
+
+                                              echo '<td><input type="hidden" id="id_tran_'.$noxx.'" name="id_tran_'.$noxx.'" value="'.$row->id_tran.'" />'.$noxx.'</td>';
+                                              echo '<td><input type="hidden" id="periode_'.$noxx.'" name="periode_'.$noxx.'" value="'.$row->periode.'" />'.$row->kode_semester.'</td>';
+                                              echo '<td class="text-right"><input type="hidden" id="id_kat_bayaran_'.$noxx.'" name="id_kat_bayaran_'.$noxx.'" value="'.$row->id_kat_bayaran.'" />'.number_format($row->biaya).'</td>';
+                                              echo '<td class="text-right"><input type="hidden" id="sisa_bayar_'.$noxx.'" name="sisa_bayar_'.$noxx.'" value="'.$row->sisa_bayar.'" />'.number_format($row->sisa_bayar).'</td>';
+                                              echo '<td><input type="hidden" id="id_siswa_'.$noxx.'" name="id_siswa_'.$noxx.'" value="'.$row->id_siswa.'" />'.$row->status_bayar.'</td>';
+
+                                              if($row->biaya > 0)
+                                              {
+
+                                                if($row->status_bayar == 'Lunas')
+                                                {
+                                                  echo '<td>';
+                                                  echo '<a href="#" data-toggle="modal" onclick="showListCetak('.$noxx.')" data-target="#modalCetak" data-backdrop="static" data-keyboard="false" > <i class="mdi mdi-view-list text-success"></i> Lihat </a>';
+                                                  echo '<a href="'.base_url().'C_tran_siswa/cetak_tahunan_all/'.$row->periode.'/'.$row->id_siswa.'" target="_blank"><i class="mdi mdi-printer text-success"></i> Cetak </a>';
+                                                  echo '</td>';
+                                                } else if($row->status_bayar == 'Belum Lunas') {
+                                                  echo '<td>
+                                                    <a href="#" data-toggle="modal" onclick="showListCetak('.$noxx.')" data-target="#modalCetak" data-backdrop="static" data-keyboard="false" > <i class="mdi mdi-view-list text-success"></i> Lihat </a>
+                                                    <a href="'.base_url().'input-tahunan/'.$row->id_siswa.'/'.$row->periode.'" data-toggle="tooltip" data-original-title=""> <i class="mdi mdi-check-circle text-danger"></i> Bayar </a>
+                                                    <a href="'.base_url().'C_tran_siswa/cetak_tahunan_all/'.$row->periode.'/'.$row->id_siswa.'" target="_blank"><i class="mdi mdi-printer text-success"></i> Cetak </a>
+                                                      </td>';
+                                                } else {
+                                                    echo '<td>';
+                                                    echo '<a href="'.base_url().'input-tahunan/'.$row->id_siswa.'/'.$row->periode.'" data-toggle="tooltip" data-original-title=""> <i class="mdi mdi-check-circle text-danger"></i> Bayar </a>';
+                                                    echo '</td>';
+                                                }
+                                              } else {
+                                                echo '<td></td>';
+                                              }
+
+                                              echo '</tr>';
+                                              $total_tagihan +=$row->biaya;
+                                              $total_sisa +=$row->sisa_bayar;
+                                              $noxx++;
+                                          }
+                                          ?>
+                                              <tr>
+                                                <td></td>
+                                                <td><strong>Total</strong></td>
+                                                <td class="text-right"><strong><?=number_format($total_tagihan);?></strong></td>
+                                                <td class="text-right"><strong><?=number_format($total_sisa);?></strong></td>
+                                                <td></td>
+                                                <td></td>
+                                              </tr>
+                                          <?php
+                                          echo '</tbody>';
+                                      }
+                                     ?>
+                                 </table>
+                               </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-8">
+                          <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="panel panel-default">
+                               <div class="panel-heading">
+                                    <div class="row">
+                                      <form action="<?=base_url();?>detail-bayaran/<?php echo $this->uri->segment(2,0).'?'.http_build_query($_GET); ?>" method="get">
+                                            <div class="col-md-12">
+                                                Tagihan Tetap
+                                            </div>
+                                      </form>
+                                    </div>
+                               </div>
+                               <div class="panel-body">
+                                 <table class="table table-bordered" id="mytable">
+                                     <thead>
+                                         <tr>
+                                             <th width="7%">#</th>
+                                              <th width="15%">Tahun Ajaran</th>
+                                              <th width="15%">Tagihan</th>
+                                              <th width="15%">Sisa Bayar</th>
+                                              <th width="20%">Status</th>
+                                              <th>Action</th>
+                                         </tr>
+                                     </thead>
+                                     <!-- echo '<td>'.$row->tgl_bayar.'</td>'; -->
+                                     <?php
+                                      if(!empty($tagihanTetap))
+                                      {
+                                          //$noxx=1;
+                                          $total_tagihan=0;
+                                          $total_sisa=0;
+                                          $c_periode = date('Y-m');
+
+                                          echo '<tbody>';
+
+                                          foreach($tagihanTetap as $row)
+                                          {
+                                              if($row->status_bayar == 'Lunas')
+                                              {
+                                                  echo '<tr class="success">';
+                                              } else {
+                                                  echo '<tr>';
+                                              }
+
+                                              echo '<td><input type="hidden" id="id_tran_'.$noxx.'" name="id_tran_'.$noxx.'" value="'.$row->id_tran.'" />'.$noxx.'</td>';
+                                              echo '<td><input type="hidden" id="periode_'.$noxx.'" name="periode_'.$noxx.'" value="'.$row->periode.'" />'.$row->kode_semester.'</td>';
+                                              echo '<td class="text-right"><input type="hidden" id="id_kat_bayaran_'.$noxx.'" name="id_kat_bayaran_'.$noxx.'" value="'.$row->id_kat_bayaran.'" />'.number_format($row->biaya).'</td>';
+                                              echo '<td class="text-right"><input type="hidden" id="sisa_bayar_'.$noxx.'" name="sisa_bayar_'.$noxx.'" value="'.$row->sisa_bayar.'" />'.number_format($row->sisa_bayar).'</td>';
+                                              echo '<td><input type="hidden" id="id_siswa_'.$noxx.'" name="id_siswa_'.$noxx.'" value="'.$row->id_siswa.'" />'.$row->status_bayar.'</td>';
+
+                                              if($row->biaya > 0)
+                                              {
+                                                if($row->status_bayar == 'Lunas')
+                                                {
+                                                  echo '<td>';
+                                                  echo '<a href="#" data-toggle="modal" onclick="showListCetak('.$noxx.')" data-target="#modalCetak" data-backdrop="static" data-keyboard="false" > <i class="mdi mdi-view-list text-success"></i> Lihat </a>';
+                                                  echo '<a href="'.base_url().'C_tran_siswa/cetak_tetap_all/'.$row->periode.'/'.$row->id_siswa.'" target="_blank"><i class="mdi mdi-printer text-success"></i> Cetak </a>';
+                                                  echo '</td>';
+                                                } else if($row->status_bayar == 'Belum Lunas') {
+                                                  echo '<td>
+                                                    <a href="#" data-toggle="modal" onclick="showListCetak('.$noxx.')" data-target="#modalCetak" data-backdrop="static" data-keyboard="false" > <i class="mdi mdi-view-list text-success"></i> Lihat </a>
+                                                    <a href="'.base_url().'input-bayaran-tetap/'.$row->id_siswa.'/'.$row->periode.'" data-toggle="tooltip" data-original-title=""> <i class="mdi mdi-check-circle text-danger"></i> Bayar </a>
+                                                    <a href="'.base_url().'C_tran_siswa/cetak_tetap_all/'.$row->periode.'/'.$row->id_siswa.'" target="_blank"><i class="mdi mdi-printer text-success"></i> Cetak </a>
+                                                      </td>';
+                                                } else {
+                                                    echo '<td>';
+                                                    echo '<a href="'.base_url().'input-bayaran-tetap/'.$row->id_siswa.'/'.$row->periode.'" data-toggle="tooltip" data-original-title=""> <i class="mdi mdi-check-circle text-danger"></i> Bayar </a>';
+                                                    echo '</td>';
+                                                }
+                                              } else {
+                                                echo '<td></td>';
+                                              }
+
+                                              echo '</tr>';
+                                              $total_tagihan +=$row->biaya;
+                                              $total_sisa +=$row->sisa_bayar;
+                                              $noxx++;
+                                          }
+                                          ?>
+                                              <tr>
+                                                <td></td>
+                                                <td><strong>Total</strong></td>
+                                                <td class="text-right"><strong><?=number_format($total_tagihan);?></strong></td>
+                                                <td class="text-right"><strong><?=number_format($total_sisa);?></strong></td>
+                                                <td></td>
+                                                <td></td>
+                                              </tr>
+                                          <?php
+                                          echo '</tbody>';
+                                      }
+                                     ?>
+                                 </table>
+                               </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                    </div>
+
+                <!-- ============================================================== -->
+            </div>
+            <!-- /.container-fluid -->
+            <footer class="footer text-center"> 2019 &copy; Ashabul Yamin </footer>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page Content -->
+        <!-- ============================================================== -->
+
+        <div id="modalCetak" class="modal fade bs-example-modal-lg in" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    List Transaksi
+                  </div>
+                  <div class="modal-body" id="list_transaksi">
+                    <table class="table table-bordered" >
+                      <thead>
+                        <tr>
+                              <th width="7%">#</th>
+                               <th width="23%">No. Transaksi</th>
+                               <th width="15%">Tgl Bayar</th>
+                               <th width="13%">Jumlah</th>
+                               <th width="33%">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody id="table_transaksi">
+
+
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="modal-footer">
+                      <!-- <button class="btn btn-info" onclick="return confirm('Apakah anda yakin?')" type="submit"> Proses Pembayaran </button> -->
+                      <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <!-- /#wrapper -->
+
+
+
+
+
+    <!-- jQuery -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="<?=base_url();?>assets/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <!--slimscroll JavaScript -->
+    <script src="<?=base_url();?>assets/js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="<?=base_url();?>assets/js/waves.js"></script>
+    <!-- data table -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="<?=base_url();?>assets/js/custom.min.js"></script>
+    <!--Style Switcher -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+
+    <script type="text/javascript">
+      function showListCetak(id)
+      {
+        var periode = $('#periode_'+id).val();
+        var id_siswa = $('#id_siswa_'+id).val();
+        var id_kat_bayaran = $('#id_kat_bayaran_'+id).val();
+
+        //alert(periode);
+        //alert(id_siswa);
+        $.post("<?=base_url();?>index.php/C_tran_siswa/list_transaksi_cetak/",
+        {
+          periode: periode,
+          id_siswa: id_siswa,
+          id_kat_bayaran: id_kat_bayaran
+        },
+        function(data, status){
+          //alert(data);
+          if(data)
+          {
+            $('#table_transaksi').html(data);
+          } else {
+
+          }
+        });
+
+
+      }
+
+      function showDetail(id)
+      {
+        //alert('test');
+        var periode = $('#periode_'+id).val();
+        var id_siswa = $('#id_siswa_'+id).val();
+        var id_kat_bayaran = $('#id_kat_bayaran_'+id).val();
+
+        //alert(periode);
+        //alert(id_siswa);
+        //alert(id_kat_bayaran);
+
+        $.post("<?=base_url();?>index.php/C_tran_siswa/get_detail_bayar/",
+  			{
+  				periode: periode,
+          id_siswa: id_siswa,
+          id_kat_bayaran: id_kat_bayaran,
+  			},
+  			function(data, status){
+  				//alert(data);
+  				if(data)
+  				{
+            $('#list_tagihan').html(data);
+  				} else {
+
+  				}
+  			});
+
+        $.post("<?=base_url();?>index.php/C_tran_siswa/get_no_bayar/",
+  			{
+  				periode: periode,
+  			},
+  			function(data, status){
+  				//alert(data);
+  				if(data)
+  				{
+            $('#get_no_bayar').html(data);
+  				} else {
+
+  				}
+  			});
+      }
+    </script>
+</body>
+
+</html>

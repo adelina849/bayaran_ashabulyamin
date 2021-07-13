@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?=base_url();?>assets/plugins/images/favicon.png">
+    <title>Aplikasi Bayaran Sekolah Ashabul Yamin</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="<?=base_url();?>assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="<?=base_url();?>assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="<?=base_url();?>assets/css/animate.css" rel="stylesheet">
+    <!-- data table-->
+    <link href="<?=base_url();?>assets/plugins/bower_components/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <!-- Custom CSS -->
+    <link href="<?=base_url();?>assets/css/style.css" rel="stylesheet">
+    <!-- data table -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
+    <!-- color CSS -->
+    <link href="<?=base_url();?>assets/css/colors/blue.css" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.<?=base_url();?>assets/js/1.4.2/respond.min.js"></script>
+
+<![endif]-->
+    <style>
+        .dataTables_wrapper {
+            min-height: 500px
+        }
+
+        .dataTables_processing {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            margin-left: -50%;
+            margin-top: -25px;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            color:grey;
+        }
+    </style>
+
+</head>
+
+<body class="fix-header">
+    <!-- ============================================================== -->
+    <!-- Preloader -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+        </svg>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Wrapper -->
+    <!-- ============================================================== -->
+    <div id="wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+
+        <?php $this->load->view('admin/topbar.html'); ?>
+
+        <!-- End Top Navigation -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+
+        <?php $this->load->view('admin/sidebar.html'); ?>
+
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page Content -->
+        <!-- ============================================================== -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+              <div class="row bg-title">
+                  <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                      <h4 class="page-title">Transaksi Pembayaran</h4> </div>
+                        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                            <ol class="breadcrumb">
+                                <li><a href="<?=base_url();?>">Dashboard</a></li>
+                                <li class="active">Transaksi Pembayaran</li>
+                            </ol>
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-4">
+                          <div class="panel panel-default">
+                             <div class="panel-heading">
+                               Pencarian Data
+                             </div>
+                             <div class="panel-body">
+                               <div class="form-group">
+                                  <label for="bigint">Tahun Ajaran</label>
+                                  <select name="ajaran" id="ajaran" class="required form-control" title="Tahun Ajaran">
+                                    <?php
+                                      if(!empty($list_ajaran))
+                                      {
+                                        //$list_result2 = $list_ajaran->result();
+                                        foreach($list_ajaran as $row)
+                                        {
+                                    ?>
+                                         <option value="<?=$row->id_ajaran;?>"><?=$row->nama_ajaran;?></option>
+                                 <?php  }
+                                      } ?>
+                                  </select>
+                              </div>
+
+                              <div class="form-group">
+                                <label for="bigint">Kelas</label>
+                                 <select name="kelas" id="kelas" class="required form-control select2" title="Kelas">
+                                   <option value='' >-- Semua Kelas --</option>
+                                   <?php
+                                     if(!empty($list_kelas))
+                                     {
+                                         //$list_result = $list_kelas->result();
+                                         foreach($list_kelas as $row)
+                                         {
+                                   ?>
+                                         <option value="<?=$row->id_kelas;?>"><?=$row->nama_kelas;?></option>
+                                   <?php }
+                                     }
+                                   ?>
+                                 </select>
+                             </div>
+
+                             <div class="form-group">
+                                  <label for="NIK">NIS Siswa</label>
+                                  <input type="text" name="cari_nik" id="cari_nik" class="form-control" value="" placeholder="Masukan NIS Siswa">
+                              </div>
+
+                              <div class="form-group">
+                                   <label for="NIK">Nama Siswa</label>
+                                   <input type="text" name="cari_nama" id="cari_nama" class="form-control" value="" placeholder="Masukan Nama Siswa">
+                               </div>
+
+                              <div class="form-group">
+                                <button type="button" onclick="showListSiswa()" class="btn btn-success waves-effect">Cari Data</button>
+                              </div>
+                             </div>
+                          </div>
+                      </div>
+                      <div class="col-md-8">
+                        <div class="panel panel-default">
+                           <div class="panel-heading">
+                             List Siswa
+                           </div>
+                           <div class="panel-body">
+                             <table class="table table-bordered table-striped" id="myTable">
+                                 <thead>
+                                     <tr>
+                                         <th width="60px">No</th>
+                                          <th width="15%">Tahun Ajaran</th>
+                                          <th width="15%">Kelas</th>
+                                          <th width="15%">NIS Siswa</th>
+                                          <th width="25%">Nama</th>
+                                          <th width="20%">Sisa Tagihan</th>
+                                          <th>Action</th>
+                                     </tr>
+                                 </thead>
+                                 <tbody id="table_siswa">
+                                 </tbody>
+                             </table>
+                           </div>
+                        </div>
+                      </div>
+                    </div>
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+
+
+
+                <!-- ============================================================== -->
+            </div>
+            <!-- /.container-fluid -->
+            <footer class="footer text-center"> 2019 &copy; Ashabul Yamin </footer>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page Content -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="<?=base_url();?>assets/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <!--slimscroll JavaScript -->
+    <script src="<?=base_url();?>assets/js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="<?=base_url();?>assets/js/waves.js"></script>
+    <!-- data table -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="<?=base_url();?>assets/js/custom.min.js"></script>
+    <!--Style Switcher -->
+    <script src="<?=base_url();?>assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+
+    <script type="text/javascript">
+
+      function showListSiswa()
+      {
+        var cari = $('#cari_nik').val();
+        var cari_nama = $('#cari_nama').val();
+        var id_ajaran = $('#ajaran').val();
+        var id_kelas = $('#kelas').val();
+
+        $('#table_siswa').html('mencari data');
+
+        $.post("<?=base_url();?>index.php/C_tran_siswa/list_kelas_siswa_cari/",
+        {
+          cari_nik: cari,
+          ajaran: id_ajaran,
+          kelas: id_kelas,
+          cari_nama: cari_nama,
+        },
+        function(data, status){
+          //alert(data);
+          if(data)
+          {
+            $('#table_siswa').html(data);
+          } else {
+
+          }
+        });
+      }
+
+    </script>
+</body>
+
+</html>
